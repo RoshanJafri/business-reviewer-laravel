@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Image;
 use App\Review;
 use App\Business;
 use App\Category;
@@ -19,14 +20,19 @@ class Business extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function amOwner()
-    {
-        return $this->owner->is(auth()->user());
-    }
-
     public function reviews()
     {
         return $this->hasMany(Review::class)->latest();
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 
     public function addReview($body, $rating, $userId = null)
@@ -40,11 +46,6 @@ class Business extends Model
                     'user_id' => $userId ? $userId : auth()->id()
                 ]
             );
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
     }
 
     public function attachCategories($categories)
@@ -72,6 +73,18 @@ class Business extends Model
     public function reviewedAlready()
     {
         return $this->reviews()->where(['user_id' => auth()->id()])->exists();
+    }
+
+    public function amOwner()
+    {
+        return $this->owner->is(auth()->user());
+    }
+
+    public function addImage($image)
+    {
+        return $this->images()->create([
+            'image_path' =>  $image->store('guest_uploads')
+        ]);
     }
 
     public function getRouteKeyName()

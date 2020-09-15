@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/businesses', 'BusinessController@store')->name('business.store');
 
     Route::post('/businesses/{business}/review', 'ReviewController@store')->name('reviews.store');
+    Route::post('/businesses/{business}/images', 'BusinessImageController@store')->name('images.store');
+
+    Route::get('/businesses/{business}/images', 'BusinessImageController@create');
 
     Route::post('/reviews/{review}/react', 'ReviewReactionController@store')->name('reviews.react');
     // Route::delete('/reviews/{review}/react', 'ReviewReactionController@delete')->name('reviews.remove');

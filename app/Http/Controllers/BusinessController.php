@@ -60,7 +60,7 @@ class BusinessController extends Controller
 
     protected function storeBusiness($request)
     {
-        $imagePath = $request['front_image']->store('public/businesses');
+        $imagePath = $request['front_image']->store('businesses');
 
         $attributes['owner_id'] = auth()->id();
         $attributes['front_image'] = $imagePath;

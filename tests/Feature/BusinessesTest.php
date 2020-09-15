@@ -31,7 +31,7 @@ class BusinessesTest extends TestCase
             ->post(route('business.store'), array_merge($business, ['categories' => [1, 2]]))
             ->assertSee($business['name']);
 
-        Storage::disk('testing_upload')->assertExists('public/businesses/' . $image->hashName());
+        Storage::disk('testing_upload')->assertExists('businesses/' . $image->hashName());
     }
 
     public function test_business_generates_a_unique_slug_identifier()
