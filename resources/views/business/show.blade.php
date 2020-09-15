@@ -1,0 +1,57 @@
+@extends('layouts.app')
+@section('content')
+<div class="heading-image mb-5">
+    <img src="{{ asset($business->image()) }}" alt="{{ $business->name }}">
+</div>
+<div class="business flex">
+
+    <section class="business_main flex-1">
+        <h1 class="text-4xl font-bold">{{ $business->name }}</h1>
+        <x-star-rating :rating="$business->average_review" :string="$business->reviews->count().' Reviews'" />
+
+        @foreach ($business->categories as $category)
+        @if($loop->last)
+        <span class="italic text-md text-gray-600">{{ $category->name }} </span>
+        @else
+        <span class="italic text-md text-gray-600">{{ $category->name }} /</span>
+        @endif
+        @endforeach
+
+        <hr class="mt-8 mb-3">
+
+
+        <p class="italic "> {{ $business->description }}</p>
+
+        <hr class="my-3">
+
+        <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos</h3>
+        @include('business.components.photos')
+
+
+        @can('addReview', $business)
+        <h3 class="font-bold text-2xl mb-6">Been here? Add a review!</h3>
+        <hr>
+        <x-add-review :business="$business" />
+        @endcan
+
+        <h3 class="font-bold text-2xl mt-6 mb-4">Reviews</h3>
+        <hr>
+        @include('business.reviews')
+    </section>
+
+    <aside class="business_aside">
+        <div class="w-full flex mb-4">
+            @can('addReview', $business)
+            <a href="#add-review" class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add a review</a>
+            @endcan
+            <a href="#"
+                class="border border-2 border-gray-600  ml-1 text-gray-600 button hover:bg-gray-600 hover:text-white">Add
+                Photo</a>
+        </div>
+        @include('business.components.info-card')
+        <x-business-rating-card :business="$business" />
+    </aside>
+</div>
+
+
+@endsection
