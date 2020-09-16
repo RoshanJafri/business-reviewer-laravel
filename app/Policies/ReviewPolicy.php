@@ -7,7 +7,7 @@ use App\Review;
 use App\Business;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ReplyPolicy
+class ReviewPolicy
 {
     use HandlesAuthorization;
 
@@ -18,15 +18,14 @@ class ReplyPolicy
      */
     public function __construct()
     {
+        //
     }
 
-    /**
-     * Determines if a review can be replied to by the user
-     *
-     * @param  \App\User  $user
-     * @param  \App\Review  $post
-     * @return bool
-     */
+    public function showcase(User $user, Review $review)
+    {
+        $business = $review->business;
+        return !$business->reviews()->where('showcased',  true)->exists() && $user->ownerOf($business);
+    }
 
     public function reply(User $user, Review $review)
     {

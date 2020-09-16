@@ -14,6 +14,5 @@ $factory->define(Review::class, function (Faker $faker) {
         'user_id' => factory(User::class),
         'business_id' => factory(Business::class),
         'rating' => $faker->numberBetween(1, 5),
-        'top_rated' => false
     ];
 });

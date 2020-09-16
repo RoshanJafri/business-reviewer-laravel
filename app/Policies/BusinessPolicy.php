@@ -24,4 +24,9 @@ class BusinessPolicy
     {
         return !$user->ownerOf($business) && !$business->reviewedAlready();
     }
+
+    public function update(User $user, Business $business)
+    {
+        return $user->ownerOf($business);
+    }
 }

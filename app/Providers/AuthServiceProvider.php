@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Policies\ReplyPolicy;
+use App\Policies\ReviewPolicy;
 use App\Policies\BusinessPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
         'App\Business ' => BusinessPolicy::class,
-        'App\Review' => ReplyPolicy::class,
+        'App\Review' => ReviewPolicy::class,
     ];
 
     /**

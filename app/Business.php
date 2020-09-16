@@ -42,13 +42,16 @@ class Business extends Model
                 [
                     'body' => $body,
                     'rating' => $rating,
-                    'user_id' => $userId ? $userId : auth()->id()
+                    'user_id' => $userId ? $userId : auth()->id(),
+                    'showcased' => false,
                 ]
             );
 
         if ($image) {
             $review->image()->create(['image_path' => $image->store('reviews')]);
         }
+
+        return $review;
     }
 
     public function attachCategories($categories)

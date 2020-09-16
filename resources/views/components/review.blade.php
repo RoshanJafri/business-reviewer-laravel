@@ -3,8 +3,13 @@
         <x-user-card :user="$review->author" />
 
         <div class="flex-1 items-between">
-            <x-star-rating :rating="$review->rating"
-                :string="\Carbon\Carbon::parse($review->created_at)->format('d M, Y')" :small="true" />
+            <div class="flex justify-between">
+                <x-star-rating :rating="$review->rating"
+                    :string="\Carbon\Carbon::parse($review->created_at)->format('d M, Y')" :small="true" />
+                @if($review->showcased)
+                <p>I have been showcased</p>
+                @endif
+            </div>
             <p>{{ $review->body }}</p>
 
             @if($review->image)
@@ -27,9 +32,25 @@
                 </form>
             </div>
             @endcan
-            <div class="reactions flex mt-5">
-                @include('svgs.smile')
-                @include('svgs.wink')
+            <div class="flex justify-between mt-5">
+                <div class="reactions flex">
+                    @include('svgs.smile')
+                    @include('svgs.wink')
+                </div>
+                @can('update', $business)
+                @if($review->showcased)
+                <form action="{{ route('reviews.showcase', $review->id) }}" method="POST">
+                    @method('DELETE')
+                    @csrf
+                    <button type="submit">Remove Showcase</button>
+                </form>
+                @else
+                <form action="{{ route('reviews.showcase', $review->id) }}" method="POST">
+                    @csrf
+                    <button type="submit">Showcase</button>
+                </form>
+                @endif
+                @endcan
             </div>
         </div>
     </div>

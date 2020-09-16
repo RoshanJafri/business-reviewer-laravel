@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('business_id');
             $table->text('body');
-            $table->boolean('top_rated')->default(false);
+            $table->boolean('showcased')->default(false);
             $table->integer('rating')->max('5');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

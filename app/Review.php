@@ -16,6 +16,9 @@ class Review extends Model
     protected $guarded = [];
     public $timestamps = true;
     public $with = ['author'];
+    public $casts = [
+        'showcased' => 'boolean'
+    ];
 
     public function author()
     {
@@ -29,7 +32,7 @@ class Review extends Model
 
     public function business()
     {
-        return $this->belongsTo(Business::class, 'review_id');
+        return $this->belongsTo(Business::class, 'business_id');
     }
 
 
