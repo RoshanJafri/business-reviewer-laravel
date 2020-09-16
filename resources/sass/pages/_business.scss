@@ -30,6 +30,12 @@
             border-radius: 10px;
         }
 
+        .guest-photo img {
+            height: 300px;
+            width: 100%;
+            object-fit: cover;
+        }
+
         .guest-photos {
             position: relative;
         }

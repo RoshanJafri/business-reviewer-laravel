@@ -49,6 +49,13 @@ body {
   border-radius: 10px;
 }
 
+.business_main .guest-photo img {
+  height: 300px;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .business_main .guest-photos {
   position: relative;
 }
