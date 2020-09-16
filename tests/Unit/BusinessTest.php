@@ -31,10 +31,7 @@ class BusinessTest extends TestCase
         $user = $this->signIn();
 
         $business = factory(Business::class)->create(['owner_id' => auth()->id()]);
-
-        $isOwner = $business->amOwner($user);
-
-        $this->assertTrue($isOwner);
+        $this->assertTrue($user->ownerOf($business));
     }
 
     public function test_it_can_add_reviews()
@@ -78,7 +75,6 @@ class BusinessTest extends TestCase
 
         $this->assertEquals($business->image(),   'storage/' . $business->front_image);
     }
-
     public function test_it_checks_if_a_user_already_reviewed()
     {
         $this->signIn();

@@ -16,6 +16,7 @@ class ReviewTest extends TestCase
      *
      * @return void
      */
+
     public function test_it_has_an_author()
     {
         $this->withoutExceptionHandling();

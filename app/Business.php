@@ -75,11 +75,6 @@ class Business extends Model
         return $this->reviews()->where(['user_id' => auth()->id()])->exists();
     }
 
-    public function amOwner()
-    {
-        return $this->owner->is(auth()->user());
-    }
-
     public function addImage($image)
     {
         return $this->images()->create([

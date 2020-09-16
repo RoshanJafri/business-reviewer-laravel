@@ -15,7 +15,7 @@ class RepliesTest extends TestCase
      *
      * @return void
      */
-    public function test_an_owner_can_reply_to_his_business_review()
+    public function test_business_owner_can_reply_to_review()
     {
         $owner = $this->signIn();
         $randomReviewer = factory('App\User')->create();

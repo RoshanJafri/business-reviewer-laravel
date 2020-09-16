@@ -10,6 +10,8 @@ class ReplyController extends Controller
 {
     public function store(ReplyRequest $request, Review $review)
     {
+        $this->authorize('reply', $review);
+
         $review->addReply($request['body']);
         return back();
     }

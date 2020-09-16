@@ -14,7 +14,7 @@
             </div>
             @endif
 
-            @if($business->amOwner() && !$review->reply)
+            @can('reply', $review)
             <div class="mt-6 mt-5">
                 <form action="/businesses/review/{{ $review->id }}/reply" method="POST">
                     <textarea name="body" rows="2" class="w-full border-2 p-2"></textarea>
@@ -22,7 +22,7 @@
                     @csrf
                 </form>
             </div>
-            @endif
+            @endcan
             <div class="reactions flex mt-5">
                 @include('svgs.smile')
                 @include('svgs.wink')

@@ -15,8 +15,7 @@ class ReplyRequest extends FormRequest
     public function authorize()
     {
 
-        $business = Business::where('id', $this->review->business_id)->first();
-        return $business->amOwner();
+        return true;
     }
 
     /**
