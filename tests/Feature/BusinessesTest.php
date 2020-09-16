@@ -112,36 +112,18 @@ class BusinessesTest extends TestCase
     {
         $business = factory('App\Business')->create(['average_review' => 0]);
         $this->signIn();
-        $business->addReview('A review', 5);
+        $business->addReview('A good review', 5);
+        $business->addReview('Another good review', 5);
 
 
         $this->assertEquals(5, $business->fresh()->average_review);
 
         $this->signIn();
-        $business->addReview('A review', 2);
+        $business->addReview('Average review', 3);
+        $business->addReview('Bad review', 2);
+        $business->addReview('Very Bad review', 1);
+
 
         $this->assertEquals(4, $business->fresh()->average_review);
     }
-
-    // public function test_a_guest_can_use_multiple_filters()
-    // {
-
-    //     $wakandaCity = BusinessFactory::withCategory('wilderness')->create(['name' => 'Wakanda City Resourt', 'average_review' => 5]);
-    //     $bannerCave = BusinessFactory::withCategory('wilderness')->create(['name' => 'Bruce Banner Laboratory', 'average_review' => 2]);
-    //     $starkTower = BusinessFactory::create(['name' => 'Stark Tower', 'average_review' => 4]);
-
-
-    //     $this->get('/businesses?category=wilderness')
-    //         ->assertSee($wakandaCity->name, $bannerCave->name)
-    //         ->assertDontSee($starkTower->name);
-
-    //     $this->get('/businesses?rated=5')
-    //         ->assertDontSee($bannerCave->name, $starkTower->name)
-    //         ->assertSee($wakandaCity->name);
-
-
-    //     $this->get('/businesses?category=wilderness&rated=5')
-    //         ->assertSee($wakandaCity->name)
-    //         ->assertDontSee($starkTower->name, $bannerCave->name);
-    // }
 }

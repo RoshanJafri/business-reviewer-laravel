@@ -11,4 +11,9 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+
+    public function path()
+    {
+        return '/storage/' . $this->image_path;
+    }
 }

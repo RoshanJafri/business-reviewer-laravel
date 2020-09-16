@@ -15,25 +15,10 @@ class UserTest extends TestCase
      * @return void
      */
 
-    public function test_it_can_see_reviews_count()
-    {
-        $user = $this->signIn();
-
-        $businessOne = BusinessFactory::create();
-
-        $businessOne->addReview('a review', 3);
-        $this->assertEquals($user->reviewsCount(), 1);
-
-        $businessTwo = BusinessFactory::create();
-
-        $businessTwo->addReview('another review', 5);
-
-        $this->assertEquals($user->reviewsCount(), 2);
-    }
 
     public function test_it_calculates_average_review()
     {
-        $user = $this->signIn();
+        $user = $this->signIn(null, ['review_count' => 0]);
 
         $businessOne = BusinessFactory::create();
         $businessTwo = BusinessFactory::create();
@@ -41,6 +26,6 @@ class UserTest extends TestCase
         $businessOne->addReview('a review', 2);
         $businessTwo->addReview('another review', 5);
 
-        $this->assertEquals($user->reviewAverage(), (5 + 2) / 2);
+        $this->assertEquals((5 + 2) / 2, $user->reviewAverage());
     }
 }

@@ -7,6 +7,10 @@
                 :string="\Carbon\Carbon::parse($review->created_at)->format('d M, Y')" :small="true" />
             <p>{{ $review->body }}</p>
 
+            @if($review->image)
+            <img src="{{ asset($review->image->path()) }}" alt="{{ $review->author->name }}" class="block w-full">
+            @endif
+
             @if($review->reply)
             <div class="p-4 w-full mt-4 bg-gray-200">
                 <span class="text-gray-600">Owner reply:</span>

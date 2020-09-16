@@ -15,10 +15,14 @@ class ReviewController extends Controller
 
         $attributes = request()->validate([
             'body' => ['required', 'string'],
-            'rating' => ['required', 'integer']
+            'rating' => ['required', 'integer'],
+            'image' => ['file', 'nullable']
         ]);
 
-        $business->addReview($attributes['body'], $attributes['rating']);
+
+        isset($attributes['image']) ?
+            $business->addReview($attributes['body'], $attributes['rating'], $attributes['image']) :
+            $business->addReview($attributes['body'], $attributes['rating']);
 
         return redirect($business->path());
     }

@@ -23,7 +23,7 @@ class UsersTest extends TestCase
         $businessTwo = BusinessFactory::create();
         $businessThree = BusinessFactory::create();
 
-        $user = $this->signIn();
+        $user = $this->signIn(null, ['review_count' => 0]);
 
         $businessOne->addReview('my first review', 1);
         $this->assertEquals(1, $user->fresh()->average_rating);

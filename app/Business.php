@@ -35,17 +35,20 @@ class Business extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function addReview($body, $rating, $userId = null)
+    public function addReview($body, $rating, $image = null, $userId = null)
     {
-        return $this->reviews()
+        $review = $this->reviews()
             ->create(
                 [
-                    'business_id' => $this->id,
                     'body' => $body,
                     'rating' => $rating,
                     'user_id' => $userId ? $userId : auth()->id()
                 ]
             );
+
+        if ($image) {
+            $review->image()->create(['image_path' => $image->store('reviews')]);
+        }
     }
 
     public function attachCategories($categories)

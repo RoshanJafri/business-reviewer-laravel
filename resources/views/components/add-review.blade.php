@@ -6,9 +6,13 @@
 
             <x-user-card />
             <div class="w-full flex-1">
-                <form action="/businesses/{{$business->id }}/review" method="POST">
+                <form action="/businesses/{{$business->slug }}/review" method="POST" enctype="multipart/form-data">
                     @csrf
 
+
+                    <div class="mb-3">
+                        <input type="file" name="image" accept="image/*">
+                    </div>
 
                     <div class="mb-3">
                         <select name="rating" class="block border-2 border-gray-200 rounded">

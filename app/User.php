@@ -48,14 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Review::class);
     }
 
-    public function reviewsCount()
-    {
-        return $this->reviews()->count();
-    }
-
     public function reviewAverage()
     {
-        return $this->reviews()->sum('rating') / $this->reviewsCount();
+        return $this->fresh()->reviews()->sum('rating') / $this->review_count;
     }
 
     public function ownerOf($business)

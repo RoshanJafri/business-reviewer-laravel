@@ -21,7 +21,8 @@ class RepliesTest extends TestCase
         $randomReviewer = factory('App\User')->create();
         $business = factory('App\Business')->create(['owner_id' => $owner->id]);
 
-        $review =  $business->addReview('I hate this place so much!', $randomReviewer->id);
+        $business->addReview('I hate this place so much!', 1, null, $randomReviewer->id);
+        $review = $business->fresh()->reviews[0];
 
         $this->followingRedirects()->post(
             '/businesses/review/' . $review->id . '/reply',
@@ -37,7 +38,9 @@ class RepliesTest extends TestCase
         $randomReviewer = factory('App\User')->create();
         $business = BusinessFactory::create();
 
-        $review =  $business->addReview('I hate this place so much!', $randomReviewer->id);
+
+        $business->addReview('I am not a owner so I cannot reply to this review', 1, null, $randomReviewer->id);
+        $review = $business->fresh()->reviews[0];
 
         $this->followingRedirects()->post(
             '/businesses/review/' . $review->id . '/reply',

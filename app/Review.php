@@ -22,6 +22,11 @@ class Review extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
     public function business()
     {
         return $this->belongsTo(Business::class, 'review_id');

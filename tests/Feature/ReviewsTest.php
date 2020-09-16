@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Review;
 use App\Business;
 use Tests\TestCase;
+use Illuminate\Support\Facades\Storage;
 use Facades\Tests\Setup\BusinessFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -60,5 +61,39 @@ class ReviewsTest extends TestCase
         $this->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 2])->assertForbidden();
 
         $this->assertDatabaseCount('reviews', 0);
+    }
+
+    public function test_a_review_displays_reactions_count()
+    {
+        $this->signIn();
+        // if we have a review
+        $review = factory('App\Review')->create();
+        // and a user reacts to a review
+        $this->post(route('reviews.react', $review->id), ['type' => 'funny']);
+        $this->post(route('reviews.react', $review->id), ['type' => 'useful']);
+
+        $this->signIn();
+        $this->post(route('reviews.react', $review->id), ['type' => 'useful']);
+        // it displays the review count
+        $this->assertEquals($review->funnyCount(), 1);
+        $this->assertEquals($review->usefulCount(), 2);
+    }
+
+    public function test_a_user_can_add_an_image_to_review()
+    {
+
+        $this->signIn();
+
+        $business = factory('App\Business')->create();
+        $user = $this->signIn();
+
+        $image = $this->mockImageUpload();
+
+        $this->followingRedirects()
+            ->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 4, 'image' => $image])
+            ->assertSee('A review')
+            ->assertSee($user->name);
+
+        Storage::disk('testing_upload')->assertExists('reviews/' . $image->hashName());
     }
 }
