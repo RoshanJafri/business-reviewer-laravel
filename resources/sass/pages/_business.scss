@@ -11,6 +11,7 @@
 
 .business {
     position: relative;
+    align-items: flex-start;
 
     &_main {
         padding-bottom: 150px;
@@ -59,8 +60,8 @@
     &_aside {
         width: 300px;
         position: sticky;
-
-        top: 0;
+        right: 0;
+        top: 50px;
 
         .card {
             width: 100%;
