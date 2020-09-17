@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\User;
+use App\View;
 use App\Review;
 use App\Business;
 use App\Category;
@@ -85,5 +86,47 @@ class BusinessTest extends TestCase
         $business->addReview('I am a review', 2);
 
         $this->assertTrue($business->reviewedAlready());
+    }
+
+    public function test_it_has_a_review_count()
+    {
+        $this->signIn();
+        $business = factory(Business::class)->create();
+
+        $this->assertEquals(0, $business->reviewCount());
+
+        $business->addReview('The first review', 4);
+
+        $this->assertEquals(1, $business->reviewCount());
+
+        $business->addReview('The second review', 3);
+        $business->addReview('The third review', 2);
+
+        $this->assertEquals(3, $business->reviewCount());
+    }
+
+
+    public function test_it_has_views()
+    {
+        $this->signIn();
+        $business = factory(Business::class)->create();
+        $business->incrementViewCount();
+
+        $this->assertInstanceOf(View::class, $business->views[0]);
+    }
+
+    public function test_it_has_a_comment_count()
+    {
+        $this->signIn();
+        $business = factory(Business::class)->create();
+
+        $business->incrementViewCount();
+
+        $this->assertEquals(1,  $business->viewCount());
+
+        $business->incrementViewCount();
+        $business->incrementViewCount();
+
+        $this->assertEquals(3,  $business->fresh()->viewCount());
     }
 }

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\View;
 use App\Image;
 use App\Review;
 use App\Business;
@@ -18,6 +19,11 @@ class Business extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function views()
+    {
+        return $this->morphMany(View::class, 'viewable');
     }
 
     public function reviews()
@@ -86,6 +92,21 @@ class Business extends Model
         return $this->images()->create([
             'image_path' =>  $image->store('guest_uploads')
         ]);
+    }
+
+    public function reviewCount()
+    {
+        return $this->reviews()->count();
+    }
+
+    public function incrementViewCount($user = null)
+    {
+        $this->views()->create(['viewer_id' => $user ?: auth()->id()]);
+    }
+
+    public function viewCount()
+    {
+        return $this->views->count();
     }
 
     public function getRouteKeyName()

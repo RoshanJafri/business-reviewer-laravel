@@ -6,14 +6,14 @@
 <div class="business flex">
 
     <section class="business_main flex-1">
-        <h1 class="text-4xl font-bold">{{ $business->name }}</h1>
+        <h1 class="text-4xl font-bold">{{ $business->name }} <small
+                class="text-gray-700 text-sm italic">{{ $business->viewCount() }} views</small></h1>
         <x-star-rating :rating="$business->average_review" :string="$business->reviews->count().' Reviews'" />
 
         @foreach ($business->categories as $category)
-        @if($loop->last)
         <span class="italic text-md text-gray-600">{{ $category->name }} </span>
-        @else
-        <span class="italic text-md text-gray-600">{{ $category->name }} /</span>
+        @if(!$loop->last)
+        /
         @endif
         @endforeach
 
@@ -34,7 +34,7 @@
         <x-add-review :business="$business" />
         @endcan
 
-        <h3 class="font-bold text-2xl mt-6 mb-4">Reviews</h3>
+        <h3 class="font-bold text-2xl mt-6 mb-4">Reviews ({{ $business->reviewCount() }})</h3>
         <hr>
         @include('business.reviews')
     </section>
