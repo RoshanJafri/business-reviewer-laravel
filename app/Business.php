@@ -101,7 +101,7 @@ class Business extends Model
 
     public function incrementViewCount($user = null)
     {
-        $this->views()->create(['viewer_id' => $user ?: auth()->id()]);
+        $this->views()->create();
     }
 
     public function viewCount()

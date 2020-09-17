@@ -48,6 +48,42 @@
         </div>
 
 
+
+
+        <div class="py-3 flex flex-col">
+            <label for="phone_number">Location</label>
+            @section('head')
+            <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+            <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
+
+            <script type="text/javascript">
+                navigator.geolocation.getCurrentPosition(pos => console.log(pos));
+
+
+                window.onload = function () {
+                    L.mapquest.key = 'lYrP4vF3Uk5zgTiGGuEzQGwGIVDGuy24';
+
+                    var map = L.mapquest.map('map', {
+                        center: [37.7749, -122.4194],
+                        layers: L.mapquest.tileLayer('map'),
+                        zoom: 15
+                    });
+
+                    marker = L.marker([45, -120], {
+                            draggable: true
+                        })
+                        .addTo(map)
+                        .on('dragend', function (e) {
+                            console.log(e.target._latlng);
+                        });
+                }
+
+            </script>
+            @endsection
+            <div id="map" style="width: 100%; height: 250px;" class="mb-5"></div>
+        </div>
+
+
         <div class="py-3 flex flex-col">
             <label for="email">Business Email</label>
             <input type="text" name="email" class="py-2 px-3 rounded" value="{{ old('phone') }}" required>

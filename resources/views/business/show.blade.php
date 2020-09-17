@@ -28,6 +28,9 @@
         @include('business.components.photos')
 
 
+        <h3 class="font-bold text-2xl mt-6 mb-4">Location</h3>
+        @include('business.components.map')
+
         @can('addReview', $business)
         <h3 class="font-bold text-2xl mb-6">Been here? Add a review!</h3>
         <hr>
