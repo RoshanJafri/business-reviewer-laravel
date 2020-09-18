@@ -76,7 +76,7 @@ class User extends Authenticatable
 
     public function displayAvatar()
     {
-        return $this->avatar ? $this->avatar->image_path : 'https://ui-avatars.com/api/?name=' . $this->name . '&color=7F9CF5&background=EBF4FF';
+        return $this->avatar ? asset('/storage/' . $this->avatar->image_path) : 'https://ui-avatars.com/api/?name=' . $this->name . '&color=7F9CF5&background=EBF4FF';
     }
 
     public function removeAvatar()
