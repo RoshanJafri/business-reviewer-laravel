@@ -1,27 +1,19 @@
-<div
-    class="flex p-4 business-cards rounded overflow-hidden rounded border-gray-400 border border-solid hover:bg-gray-100">
-
-    <div class="image-container">
-        <img src="{{ asset($business->image()) }}" alt="{{ $business->title }}">
-    </div>
-
-
-    <div class="px-5 p-2 leading-normal">
-
-        <div class="text-gray-900 font-bold text-xl mb-2 flex items-center justify-between"><a
-                href="{{ $business->path() }}">{{ $business->name }}</a>
-            <x-star-rating :rating="$business->average_review" :small="true" />
+<a href="{{ $business->path() }}">
+    <div class="business-cards">
+        <div class="image-container">
+            <img src="{{ asset($business->image()) }}" alt="{{ $business->title }}">
         </div>
 
-        <ul>
+        <div class="right-side ml-3 ">
+            <h2 class="font-bold text-xl">{{ \Str::limit($business->name, 50) }}</h2>
             @foreach ($business->categories as $category)
-            <li class="inline text-sm"><a href="#" class="text-gray-600">{{!$loop->first ? '/ ' : ''  }}
-                    {{ $category->name }}</a>
-            </li>
+            <span class="italic text-sm">{{ $category->name }} </span>
+            @if(!$loop->last)
+            /
+            @endif
             @endforeach
-        </ul>
-
-        <p>{{ \Str::limit($business->description, 250) }}</p>
-
+            <x-star-rating :rating="$business->average_review" :small="true" :string="$business->reviewCount()" />
+            <p>{{ \Str::limit($business->description, 120) }}</p>
+        </div>
     </div>
-</div>
+</a>

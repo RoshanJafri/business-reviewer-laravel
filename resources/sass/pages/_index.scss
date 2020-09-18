@@ -3,9 +3,14 @@
 
         & .business-cards {
 
-            margin-bottom: 15px;
+            @apply .p-4 .border .border-solid .border-gray-200 .rounded .mb-5 .flex;
+
+            &:hover {
+                @apply .bg-gray-100;
+            }
 
             & .image-container {
+                min-width: 300px;
                 width: 300px;
 
                 & img {
