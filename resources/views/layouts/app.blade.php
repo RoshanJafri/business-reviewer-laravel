@@ -26,10 +26,10 @@
 </head>
 
 <body>
-    <div id="app" class="bg-gray-200">
+    <div id="app" class="bg-gray-100">
         @include('layouts.navigation')
 
-        <main class="container m-auto mt-5  p-3 md:p-10 ">
+        <main class="container m-auto mt-5  p-3 md:p-10 bg-white rounded-md shadow-lg">
             @yield('content')
         </main>
     </div>
