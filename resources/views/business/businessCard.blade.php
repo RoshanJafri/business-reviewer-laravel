@@ -1,28 +1,27 @@
-<div class="max-w-sm w-full lg:max-w-full lg:flex my-2" style="height: 250px;">
+<div
+    class="flex p-4 business-cards rounded overflow-hidden rounded border-gray-400 border border-solid hover:bg-gray-100">
 
-    <div class="block w-full md:w-1/3" style="height: 100%;"> <img src="{{ asset($business->image()) }}"
-            alt="{{ $business->title }}" style="height: 100%; width: 100%; object-fit: cover;">
+    <div class="image-container">
+        <img src="{{ asset($business->image()) }}" alt="{{ $business->title }}">
     </div>
 
 
-    <div class="border-r  w-full md:w-2/3 border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white
-        rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-        <div class="mb-8">
-            <div class="text-gray-900 font-bold text-xl mb-2"><a
-                    href="{{ $business->path() }}">{{ $business->name }}</a></div>
-            <ul>
-                @foreach ($business->categories as $category)
-                <li class="inline"><a href="#" class="text-gray-600">{{!$loop->first ? '/ ' : ''  }}
-                        {{ $category->name }}</a>
-                </li>
-                @endforeach
-            </ul>
-            <p class="text-gray-700 text-base mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+    <div class="px-5 p-2 leading-normal">
+
+        <div class="text-gray-900 font-bold text-xl mb-2 flex items-center justify-between"><a
+                href="{{ $business->path() }}">{{ $business->name }}</a>
+            <x-star-rating :rating="$business->average_review" :small="true" />
         </div>
-        <x-star-rating :small="true" :rating="$business->average_review"
-            :string="$business->reviews->count() . ' Reviews'" />
+
+        <ul>
+            @foreach ($business->categories as $category)
+            <li class="inline text-sm"><a href="#" class="text-gray-600">{{!$loop->first ? '/ ' : ''  }}
+                    {{ $category->name }}</a>
+            </li>
+            @endforeach
+        </ul>
+
+        <p>{{ \Str::limit($business->description, 250) }}</p>
+
     </div>
-
-
 </div>

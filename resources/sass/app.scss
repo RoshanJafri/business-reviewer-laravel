@@ -2,14 +2,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
 
 
-// App
-
+// Base
 @import "base/base";
+
+// Pages
 @import "pages/business";
+@import "pages/index";
+
+// Components
 @import "components/button";
+@import "components/nav";
 
 // Variables
-
 @import 'variables';
 
 // Tailwind

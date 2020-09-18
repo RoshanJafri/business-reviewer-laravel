@@ -26,47 +26,10 @@
 </head>
 
 <body>
-    <div id="app">
-        <nav class="flex justify-between container m-auto py-5">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
+    <div id="app ">
+        @include('layouts.navigation')
 
-            <div class="list-none">
-                @guest
-
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-
-                @if (Route::has('register'))
-
-                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-
-                @endif
-
-                @else
-                <div class="flex align-center">
-                    <div class="flex align-center">
-                        <img src="https://www.gravatar.com/avatar/{{ Auth::user()->email }}?s=30" class="rounded-full"
-                            alt="">
-                        <p class="ml-1">{{ Auth::user()->name }}</p>
-                    </div>
-                    <a class="ml-2" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                        {{ __('Logout') }}
-                    </a>
-
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-
-                </div>
-                @endguest
-                </ul>
-            </div>
-        </nav>
-        <hr>
-
-        <main class="container m-auto ">
+        <main class="container m-auto mt-5">
             @yield('content')
         </main>
     </div>

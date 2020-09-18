@@ -33,3 +33,39 @@ Vue.component(
 const app = new Vue({
     el: "#app"
 });
+
+console.log("her");
+
+const navDropdownBtn = document.querySelector("#nav-dropdown");
+
+navDropdownBtn.addEventListener("click", () => {
+    document.querySelector("#dropdown-items").classList.toggle("shown");
+});
+
+window.addEventListener("click", e => {
+    // console.log(document.querySelector("#dropdown-items").contains(e.target));
+    if (
+        !document.querySelector("#dropdown-items").contains(e.target) &&
+        !document.querySelector("#nav-dropdown").contains(e.target)
+    ) {
+        document.querySelector("#dropdown-items").classList.remove("shown");
+    }
+});
+
+// window.addEventListener("click", function(e) {
+//     if (
+//         document.querySelector(".show-search-dropdown") &&
+//         !document.querySelector(".navigation").contains(e.target)
+//     ) {
+//         dropdownMenu.classList.remove("show");
+//     }
+
+//     if (
+//         document.querySelector(".show-search-dropdown") &&
+//         !document.querySelector(".show-search-dropdown").contains(e.target)
+//     ) {
+//         document
+//             .querySelector(".main__content-search")
+//             .classList.remove("show-search-dropdown");
+//     }
+// });

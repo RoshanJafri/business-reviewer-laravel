@@ -46,7 +46,6 @@ class Review extends Model
         return $this->reply()->create(['body' => $body, 'owner_id' => $user ? $user->id : auth()->id()]);
     }
 
-
     public function funnyCount()
     {
         return $this->reactions()->where(['type' => 'funny'])->count();
