@@ -2,8 +2,11 @@
 
 namespace App;
 
+use App\Image;
 use App\Review;
 use App\Business;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +41,12 @@ class User extends Authenticatable
     ];
 
 
+
+    public function avatar()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
     public function business()
     {
         return $this->hasOne(Business::class);
@@ -56,5 +65,23 @@ class User extends Authenticatable
     public function ownerOf($business)
     {
         return $business->owner_id == auth()->id();
+    }
+
+    public function addAvatar($image)
+    {
+        return $this->avatar()->create([
+            'image_path' =>  $image->store('avatars')
+        ]);
+    }
+
+    public function displayAvatar()
+    {
+        return $this->avatar ? $this->avatar->image_path : 'https://ui-avatars.com/api/?name=' . $this->name . '&color=7F9CF5&background=EBF4FF';
+    }
+
+    public function removeAvatar()
+    {
+        Storage::delete($this->avatar->image_path);
+        $this->avatar()->delete();
     }
 }

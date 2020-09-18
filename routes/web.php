@@ -33,6 +33,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::delete('/reviews/{review}/react', 'ReviewReactionController@delete')->name('reviews.remove');
 
     Route::post('/businesses/review/{review}/reply', 'ReplyController@store');
+
+
+    Route::post('/profiles/{user}/avatars', 'AvatarController@store')->name('profiles.add-avatar');
+    Route::delete('/profiles/{user}/avatars', 'AvatarController@delete')->name('profiles.remove-avatar');
 });
 
 Route::get('/businesses', 'BusinessController@index');
