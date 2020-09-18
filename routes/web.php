@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/profiles/{user}/avatars', 'AvatarController@store')->name('profiles.add-avatar');
     Route::delete('/profiles/{user}/avatars', 'AvatarController@delete')->name('profiles.remove-avatar');
+
+    Route::get('/profiles/{user}', 'ProfileController@show')->name('profiles.show');
 });
 
 Route::get('/businesses', 'BusinessController@index');

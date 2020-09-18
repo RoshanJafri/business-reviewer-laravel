@@ -1,4 +1,4 @@
-<nav class="py-5 shadow-md">
+<nav class="py-5 shadow-md bg-white">
     <div class="flex justify-between items-center m-auto  container">
         <a class="navbar-brand" href="{{ url('/') }}">
             <img src="{{ asset('images/logo.svg') }}" height=10 alt="Logo">
@@ -28,7 +28,7 @@
                 <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg" id="dropdown-items">
                     <div class="rounded-md bg-white shadow-xs">
                         <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                            <a href="#"
+                            <a href="{{ route('profiles.show', Auth::user()->id) }}"
                                 class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                                 role="menuitem">Profile</a>
                             <form method="POST" action="{{ route('logout') }}">
