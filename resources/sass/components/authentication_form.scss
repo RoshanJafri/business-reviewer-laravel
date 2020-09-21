@@ -1,0 +1,23 @@
+.authentication__form {
+    width: 380px;
+    margin: 0 auto;
+    padding: 30px;
+
+    @media only screen and (max-width: 460px) {
+        padding: 30px 10px;
+        width: 90%;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    select {
+        width: 100%;
+        @apply .shadow .appearance-none .border .border-gray-400 .rounded .w-full .py-2 .px-3 .text-gray-700 .leading-tight;
+
+        &:focus {
+            @apply .shadow-outline .outline-none;
+        }
+    }
+
+}

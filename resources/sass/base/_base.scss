@@ -23,6 +23,15 @@ body {
     color: #333 !important;
 }
 
+.container {
+    @media only screen and (max-width: 800px) {
+        width: 90% !important;
+    }
+}
+
+#app {
+    min-height: 100vh;
+}
 
 .stars {
     &-small {

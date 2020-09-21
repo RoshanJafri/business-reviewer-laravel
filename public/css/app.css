@@ -11,6 +11,16 @@ body {
   color: #333 !important;
 }
 
+@media only screen and (max-width: 800px) {
+  .container {
+    width: 90% !important;
+  }
+}
+
+#app {
+  min-height: 100vh;
+}
+
 .stars-small {
   width: 20px;
 }
@@ -169,8 +179,8 @@ body {
   transition-property: all;
   transition-duration: 200ms;
   --bg-opacity: 1;
-  background-color: #fc8181;
-  background-color: rgba(252, 129, 129, var(--bg-opacity));
+  background-color: #f56565;
+  background-color: rgba(245, 101, 101, var(--bg-opacity));
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
@@ -188,6 +198,52 @@ body {
   --border-opacity: 1;
   border-color: #fc8181;
   border-color: rgba(252, 129, 129, var(--border-opacity));
+}
+
+.authentication__form {
+  width: 380px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+@media only screen and (max-width: 460px) {
+  .authentication__form {
+    padding: 30px 10px;
+    width: 90%;
+  }
+}
+
+.authentication__form input[type=email],
+.authentication__form input[type=password],
+.authentication__form input[type=text],
+.authentication__form select {
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #cbd5e0;
+  border-color: rgba(203, 213, 224, var(--border-opacity));
+  border-radius: 0.25rem;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+  line-height: 1.25;
+}
+
+.authentication__form input[type=email]:focus,
+.authentication__form input[type=password]:focus,
+.authentication__form input[type=text]:focus,
+.authentication__form select:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+  outline: 0;
 }
 
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

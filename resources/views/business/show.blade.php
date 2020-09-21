@@ -47,9 +47,9 @@
             @can('addReview', $business)
             <a href="#add-review" class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add a review</a>
             @endcan
-            <a href="#"
+            <button href="#" @click="openModal('add-image')"
                 class="border border-2 border-gray-600  ml-1 text-gray-600 button hover:bg-gray-600 hover:text-white">Add
-                Photo</a>
+                Photo</button>
         </div>
         @include('business.components.info-card')
         <x-business-rating-card :business="$business" />
