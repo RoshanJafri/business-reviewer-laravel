@@ -24,17 +24,25 @@ Vue.component(
     require("./components/ExampleComponent.vue").default
 );
 
+const modal = Vue.component("modal", require("./components/Modal.vue").default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: "#app"
-});
+import { modalBus } from "./buses/buses.js";
 
-console.log("her");
+const app = new Vue({
+    el: "#app",
+    methods: {
+        openModal(modal) {
+            modalBus.$emit("modal", modal);
+            modalBus.modalIsOpened = true;
+        }
+    }
+});
 
 const navDropdownBtn = document.querySelector("#nav-dropdown");
 
