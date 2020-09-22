@@ -13,9 +13,14 @@ class BusinessImageController extends Controller
             'image' => ['required', 'file']
         ]);
 
+
+        if (explode('/', request('image')->getMimeType())[0] !== 'image') {
+            return response('Invalid file type', 400);
+        }
+
         $business->addImage(request('image'));
 
-        return redirect($business->path());
+        return response(null, 200);
     }
 
     public function create(Business $business)

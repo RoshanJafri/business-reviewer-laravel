@@ -20,6 +20,12 @@
     @yield('head')
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        const csrfToken = @JSON(csrf_token());
+        const currentUser = @JSON(Auth::user());
+
+    </script>
 </head>
 
 <body>
