@@ -37,6 +37,10 @@ body {
      object-fit: cover;
 }
 
+.dz-preview {
+  display: none !important;
+}
+
 .business {
   position: relative;
   align-items: flex-start;
@@ -56,14 +60,16 @@ body {
   margin-left: auto;
 }
 
+.business_main .guest-photos {
+  overflow: hidden;
+}
+
 .business_main .guest-photos div,
 .business_main .guest-photos div img {
   border-radius: 10px;
 }
 
 .business_main .guest-photo img {
-  height: 300px;
-  width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
