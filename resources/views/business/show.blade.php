@@ -5,7 +5,7 @@
 </div>
 <div class="business flex">
 
-    <section class="business_main flex-1">
+    <section class="business_main flex-1 overflow-hidden">
         <h1 class="text-4xl font-bold">{{ $business->name }} <small
                 class="text-gray-700 text-sm italic">{{ $business->viewCount() }} views</small></h1>
         <x-star-rating :rating="$business->average_review" :string="$business->reviews->count().' Reviews'" />
@@ -24,8 +24,11 @@
 
         <hr class="my-3">
 
-        <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos</h3>
-        @include('business.components.photos')
+        <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos
+            {{ $business->images->count() > 0 ? '(' . $business->images->count() .')' : '' }}</h3>
+
+        <businessphotos :images="{{ $business->images }}">
+        </businessphotos>
 
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Location</h3>

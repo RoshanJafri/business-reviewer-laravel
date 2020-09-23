@@ -25,6 +25,10 @@ Vue.component(
 );
 
 const modal = Vue.component("modal", require("./components/Modal.vue").default);
+Vue.component(
+    "businessphotos",
+    require("./components/BusinessPhotos.vue").default
+);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

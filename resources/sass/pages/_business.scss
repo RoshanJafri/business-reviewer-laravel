@@ -9,6 +9,10 @@
     }
 }
 
+.dz-preview {
+    display: none !important;
+}
+
 .business {
     position: relative;
     align-items: flex-start;
@@ -26,14 +30,18 @@
             margin-left: auto;
         }
 
+        .guest-photos {
+            overflow: hidden;
+        }
+
         .guest-photos div,
         .guest-photos div img {
             border-radius: 10px;
         }
 
         .guest-photo img {
-            height: 300px;
-            width: 100%;
+            // height: 300px;
+            // width: 300px;
             object-fit: cover;
         }
 
