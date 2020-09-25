@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Review;
 use App\Business;
 
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+
+    public function index(Business $business)
+    {
+        return $business->reviews;
+    }
+
     public function store(Business $business)
     {
         $this->authorize('addReview', $business);

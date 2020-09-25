@@ -23,13 +23,33 @@ Vue.component(
     "example-component",
     require("./components/ExampleComponent.vue").default
 );
+Vue.component("modal", require("./components/Modal.vue").default);
 
-const modal = Vue.component("modal", require("./components/Modal.vue").default);
 Vue.component(
     "businessphotos",
     require("./components/BusinessPhotos.vue").default
 );
 
+Vue.component("reviews", require("./components/review/Reviews.vue").default);
+
+Vue.mixin({
+    methods: {
+        getLocationUrl(section) {
+            const fullUrl = window.location.pathname;
+
+            switch (section) {
+                case "business":
+                    return fullUrl.split("/")[2];
+
+                default:
+                    return fullUrl;
+            }
+        },
+        getAsset(location, name) {
+            return `${window.location.origin}/${location}/${name}`;
+        }
+    }
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

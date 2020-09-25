@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Facades\Tests\Setup\BusinessFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Setup\BusinessFactory as SetupBusinessFactory;
 
 class ReviewsTest extends TestCase
 {
@@ -135,5 +136,11 @@ class ReviewsTest extends TestCase
         $this->post(route('reviews.showcase', $seconReview->id))->assertRedirect($business->path());
         $this->assertFalse($firstReview->fresh()->showcased);
         $this->assertTrue($seconReview->fresh()->showcased);
+    }
+
+    public function test_returns_reviews_in_json_format_if_so_requested()
+    {
+        $business = BusinessFactory::withReviews(3)->create();
+        $this->getJson($business->path() . '/review')->assertStatus(200);
     }
 }

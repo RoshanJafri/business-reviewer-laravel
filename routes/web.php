@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 
+Route::get('/businesses/{business}/review', 'ReviewController@index')->name('reviews.index');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/businesses/create', 'BusinessController@create');

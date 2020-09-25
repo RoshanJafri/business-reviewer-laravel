@@ -27,7 +27,7 @@
         <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos
             {{ $business->images->count() > 0 ? '(' . $business->images->count() .')' : '' }}</h3>
 
-        <businessphotos :images="{{ $business->images }}">
+        <businessphotos :images="{{ $business->images->take(8) }}">
         </businessphotos>
 
 
@@ -42,7 +42,10 @@
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Reviews ({{ $business->reviewCount() }})</h3>
         <hr>
-        @include('business.reviews')
+
+        <reviews></reviews>
+
+
     </section>
 
     <aside class="business_aside">
@@ -50,9 +53,11 @@
             @can('addReview', $business)
             <a href="#add-review" class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add a review</a>
             @endcan
+            @if(Auth::check())
             <button href="#" @click="openModal('add-image')"
                 class="border border-2 border-gray-600  ml-1 text-gray-600 button hover:bg-gray-600 hover:text-white">Add
                 Photo</button>
+            @endif
         </div>
         @include('business.components.info-card')
         <x-business-rating-card :business="$business" />
