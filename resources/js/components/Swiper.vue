@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="flex carousel">
+        <div class="flex carousel" ref="carousel">
             <button class="carousel-btn prev-btn" @click="prev"><</button>
             <img
-                v-for="image in carouselImages"
+                v-for="image in images"
                 :key="image.id"
                 :src="imageSrc(image.image_path)"
                 alt="#"
@@ -19,17 +19,8 @@ export default {
     props: ["images"],
     data() {
         return {
-            stepCount: 0,
-            carouselImages: []
+            stepCount: 0
         };
-    },
-    mounted() {
-        this.carouselImages = this.images;
-
-        if (this.images.length % 2 !== 0) {
-            const placeHolderUrl = `${window.location.origin}/images/placeholder.png`;
-            this.carouselImages.push({ id: 13812, image_path: placeHolderUrl });
-        }
     },
     methods: {
         imageSrc(path) {
@@ -38,20 +29,34 @@ export default {
         },
         next() {
             this.stepCount++;
-            if (this.stepCount >= this.carouselImages.length - 2)
+
+            // gets width of carousel container and devides by image size (300px)
+            const displayedItemsCount = Math.floor(
+                this.$refs.carousel.getBoundingClientRect().width / 300
+            );
+
+            if (this.stepCount >= this.images.length - displayedItemsCount) {
                 this.stepCount = 0;
+            }
+
             this.transformImages();
         },
         prev() {
             this.stepCount--;
-            if (this.stepCount <= 0)
-                this.stepCount = this.carouselImages.length - 1;
+
+            const displayedItemsCount = Math.ceil(
+                this.$refs.carousel.getBoundingClientRect().width / 300
+            );
+
+            if (this.stepCount < 0) {
+                this.stepCount = this.images.length - displayedItemsCount;
+            }
             this.transformImages();
         },
         transformImages() {
+            console.log(this.stepCount);
             this.$refs.image.forEach(image => {
-                image.style.transform = `translateX(-${this.stepCount *
-                    (300 + this.carouselImages.length * 5)}px)`;
+                image.style.transform = `translateX(-${this.stepCount * 100}%)`;
             });
         }
     }
