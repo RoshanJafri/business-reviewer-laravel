@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class BusinessImageController extends Controller
 {
+
+    public function index(Business $business)
+    {
+      return view('business.images.view', compact('business'));
+    }
+
     public function store(Business $business)
     {
         request()->validate([

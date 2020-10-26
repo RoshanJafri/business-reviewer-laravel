@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/businesses/{business}/review', 'ReviewController@store')->name('reviews.store');
     Route::post('/businesses/{business}/images', 'BusinessImageController@store')->name('images.store');
+    Route::get('/businesses/{business}/images/all', 'BusinessImageController@index')->name('images.index');
 
     Route::get('/businesses/{business}/images', 'BusinessImageController@create');
 

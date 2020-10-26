@@ -30,6 +30,11 @@ Vue.component(
     require("./components/BusinessPhotos.vue").default
 );
 
+Vue.component(
+    "add-review",
+    require("./components/review/AddReview.vue").default
+);
+
 Vue.component("reviews", require("./components/review/Reviews.vue").default);
 
 Vue.mixin({
