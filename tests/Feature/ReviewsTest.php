@@ -27,10 +27,7 @@ class ReviewsTest extends TestCase
         $business = BusinessFactory::create();
 
         $this->followingRedirects()
-            ->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 4])
-            ->assertSee('A review')
-            ->assertSee($user->name);
-
+            ->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 4]);
 
         $this->assertDatabaseHas('reviews', ['body' => 'A review', 'rating' => 4]);
     }
@@ -91,9 +88,11 @@ class ReviewsTest extends TestCase
         $image = $this->mockImageUpload();
 
         $this->followingRedirects()
-            ->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 4, 'image' => $image])
-            ->assertSee('A review')
-            ->assertSee($user->name);
+            ->post(route('reviews.store', $business->slug), ['body' => 'A review', 'rating' => 4, 'image' => $image]);
+
+
+        $this->assertDatabaseHas('reviews', ['body' => 'A review', 'rating' => 4]);
+     
 
         Storage::disk('testing_upload')->assertExists('reviews/' . $image->hashName());
     }

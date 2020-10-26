@@ -1,8 +1,8 @@
 <template>
     <div class="guest-photos">
-        <!-- <a href="#" class="button all-photos">View All</a> -->
         <Swiper :images="images" />
-        <!-- <p>No user provided images yet.</p> -->
+        <p v-if="!images.length">No user provided images yet.</p>
+        <a :href="url" class="button all-photos">View All</a>
     </div>
 </template>
 
@@ -13,6 +13,10 @@ export default {
     props: {
         images: {
             type: Array,
+            required: true
+        },
+        url: {
+            type: String,
             required: true
         }
     },

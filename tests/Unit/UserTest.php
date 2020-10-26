@@ -64,6 +64,6 @@ class UserTest extends TestCase
         $image = $this->mockImageUpload();
         $user->addAvatar($image);
 
-        $this->assertEquals('avatars/' . $image->hashName(), $user->fresh()->displayAvatar());
+        $this->assertEquals(asset('/storage/avatars/' . $image->hashName()), $user->fresh()->displayAvatar());
     }
 }

@@ -25,10 +25,12 @@
         <hr class="my-3">
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos
-            {{ $business->images->count() > 0 ? '(' . $business->images->count() .')' : '' }}</h3>
+            {{ $business->images->count() > 0 ? '(' . $business->images->count() .')' : '' }}
+        </h3>
 
-        <businessphotos :images="{{ $business->images->take(8) }}">
+        <businessphotos :images="{{ $business->images->take(8) }}" :url="'{{ $business->path() . '/images/all'}}'">
         </businessphotos>
+
 
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Location</h3>
@@ -37,7 +39,8 @@
         @can('addReview', $business)
         <h3 class="font-bold text-2xl mb-6">Been here? Add a review!</h3>
         <hr>
-        <x-add-review :business="$business" />
+        {{-- <x-add-review :business="$business" /> --}}
+        <add-review :url-path="'{{ "/businesses/". $business->slug ."/review" }}'"></add-review>
         @endcan
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Reviews ({{ $business->reviewCount() }})</h3>
@@ -48,7 +51,7 @@
 
     </section>
 
-    <aside class="business_aside">
+    <aside class=" business_aside">
         <div class="w-full flex mb-4">
             @can('addReview', $business)
             <a href="#add-review" class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add a review</a>

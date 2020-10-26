@@ -1,7 +1,6 @@
 <template>
     <ul class="mt-5">
         <div v-if="reviews.length">
-            <!-- <x-review :review="$review" :business="$business" /> -->
             <Review
                 v-for="review in reviews"
                 :key="review.id"

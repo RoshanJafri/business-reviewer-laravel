@@ -62,7 +62,8 @@ class BusinessesTest extends TestCase
         $bannerCave = BusinessFactory::create();
 
         $this->get('/businesses')
-            ->assertSee($wakandaCity->name, $bannerCave->name);
+            ->assertSee($wakandaCity->name)
+            ->assertSee($bannerCave->name);
     }
 
     public function test_a_guest_can_view_business_and_reviews()
