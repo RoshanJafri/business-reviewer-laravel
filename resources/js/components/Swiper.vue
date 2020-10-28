@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex carousel" ref="carousel">
-            <button class="carousel-btn prev-btn" @click="prev"><</button>
+            <button class="carousel-btn prev-btn" @click="prev" v-if="images.length > 3"><</button>
             <img
                 v-for="image in images"
                 :key="image.id"
@@ -9,7 +9,7 @@
                 alt="#"
                 ref="image"
             />
-            <button class="carousel-btn next-btn" @click="next">></button>
+            <button class="carousel-btn next-btn" @click="next" v-if="images.length > 3">></button>
         </div>
     </div>
 </template>

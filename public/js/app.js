@@ -38407,7 +38407,7 @@ var render = function() {
       _vm._v(" "),
       !_vm.images.length ? _c("p", [_vm._v("No user images yet.")]) : _vm._e(),
       _vm._v(" "),
-      _vm.images.length
+      _vm.images.length > 3
         ? _c(
             "a",
             { staticClass: "button all-photos", attrs: { href: _vm.url } },
@@ -38660,11 +38660,13 @@ var render = function() {
       "div",
       { ref: "carousel", staticClass: "flex carousel" },
       [
-        _c(
-          "button",
-          { staticClass: "carousel-btn prev-btn", on: { click: _vm.prev } },
-          [_vm._v("<")]
-        ),
+        _vm.images.length > 3
+          ? _c(
+              "button",
+              { staticClass: "carousel-btn prev-btn", on: { click: _vm.prev } },
+              [_vm._v("<")]
+            )
+          : _vm._e(),
         _vm._v(" "),
         _vm._l(_vm.images, function(image) {
           return _c("img", {
@@ -38675,11 +38677,13 @@ var render = function() {
           })
         }),
         _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "carousel-btn next-btn", on: { click: _vm.next } },
-          [_vm._v(">")]
-        )
+        _vm.images.length > 3
+          ? _c(
+              "button",
+              { staticClass: "carousel-btn next-btn", on: { click: _vm.next } },
+              [_vm._v(">")]
+            )
+          : _vm._e()
       ],
       2
     )
