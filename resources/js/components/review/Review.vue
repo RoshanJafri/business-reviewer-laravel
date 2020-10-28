@@ -1,6 +1,6 @@
 <template>
     <li class=" mb-2 rounded">
-        <div class="flex w-full">
+        <div class="lg:flex w-full">
             <!-- <x-user-card :user="$review->author" /> -->
             <UserCard :author="reviewData.author" />
             <div class="flex-1 items-between">

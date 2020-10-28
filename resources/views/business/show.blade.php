@@ -49,7 +49,7 @@
 
     </section>
 
-    <aside class=" business_aside">
+    <aside class=" business_aside hidden md:block">
         <div class="w-full flex mb-4">
             @can('addReview', $business)
             <a href="#add-review" class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add a review</a>

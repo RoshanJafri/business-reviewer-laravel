@@ -1,7 +1,7 @@
 <template>
-    <div class="flex items-start" style="width: 35% !important;">
+    <div class="flex items-start user-card">
 
-        <img v-if="author.avatar" width="60"  class="rounded" :src="avatarUrl" :alt="`${author.name} ${author.surname}`" :title="`${author.name} ${author.surname}`">
+        <img v-if="author.avatar" width="60"  class="rounded" :src="avatarUrl" :alt="`${author.name} ${author.surname}`" >
 
         <img v-else
             :src="`https://ui-avatars.com/api/?name=${author.name}&color=7F9CF5&background=EBF4FF`"
@@ -12,18 +12,24 @@
 
 
 
-        <div class="ml-2">
-            <h5>
+        <div class="ml-2 flex flex-1 justify-between items-center lg:block mb-5 lg:mb-0">
+            <div>
+                <h5>
                 <strong>{{ author.name }}</strong>
             </h5>
             <p class="mb-1">{{ author.country }}, {{ author.city }}</p>
-            <p class="text-xs flex items-center ">
+            </div>
+
+           <div>
+                <p class="text-xs flex items-center ">
                 <img
                     :src="getAsset('images', 'thumbs-up.svg')"
                     alt="review icon"
                     class="mr-1"
                 />{{ author.review_count }} Reviews
             </p>
+
+        
             <p class=" text-xs flex items-center">
                 <img
                     :src="getAsset('images', 'review-icon.svg')"
@@ -32,6 +38,8 @@
                 />{{ author.average_rating }}
                 Avg. Rating
             </p>
+           </div>
+
         </div>
     </div>
 </template>
@@ -52,4 +60,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.user-card {
+    width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .user-card {
+    width: 35%;
+}
+}
+</style>

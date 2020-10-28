@@ -51,6 +51,13 @@ body {
   margin-right: 20px;
 }
 
+
+@media only screen and (max-width: 1024px) {
+  .business_main {
+    padding-bottom: 0;
+  }
+}
+
 .business_main .stars-container > *:not(:first-child) {
   margin-left: 5px;
 }
