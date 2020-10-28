@@ -34,6 +34,11 @@ Vue.component(
 );
 
 Vue.component(
+    "showcasedreviews",
+    require("./components/ShowcasedReviews.vue").default
+);
+
+Vue.component(
     "add-review",
     require("./components/review/AddReview.vue").default
 );

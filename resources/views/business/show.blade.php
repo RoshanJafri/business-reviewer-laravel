@@ -18,11 +18,13 @@
         @endforeach
 
         <hr class="mt-8 mb-3">
-
-
         <p class="italic "> {{ $business->description }}</p>
-
         <hr class="my-3">
+
+
+        <showcasedreviews :business-slug="'{{ $business->slug }}'"></showcasedreviews>
+
+
 
         <h3 class="font-bold text-2xl mt-6 mb-4">Guest Photos
             {{ $business->images->count() > 0 ? '(' . $business->images->count() .')' : '' }}
@@ -30,6 +32,8 @@
 
         <businessphotos :images="{{ $business->images->take(8) }}" :url="'{{ $business->path() . '/images/all'}}'">
         </businessphotos>
+
+
 
 
 

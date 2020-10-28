@@ -21,6 +21,9 @@ Route::get('/', function () {
 Route::get('/businesses/{business}/review', 'ReviewController@index')->name('reviews.index');
 Route::get('/businesses/review/{review}', 'ReviewController@fetch');
 
+Route::get('/businesses/{business}/review/showcased', 'ReviewController@showcased')->name('reviews.showcased');
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/businesses/create', 'BusinessController@create');
     Route::post('/businesses', 'BusinessController@store')->name('business.store');
@@ -32,8 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/businesses/{business}/images', 'BusinessImageController@create');
 
     Route::post('/reviews/{review}/react', 'ReviewReactionController@store')->name('reviews.react');
-    Route::post('/reviews/{review}/showcase/remove', 'ReviewShowcaseController@remove')->name('reviews.remove');
 
+    Route::post('/reviews/{review}/showcase/remove', 'ReviewShowcaseController@remove')->name('reviews.remove');
     Route::post('/reviews/{review}/showcase', 'ReviewShowcaseController@store')->name('reviews.showcase');
     // Route::delete('/reviews/{review}/react', 'ReviewReactionController@delete')->name('reviews.remove');
 
