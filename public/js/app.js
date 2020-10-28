@@ -38225,15 +38225,19 @@ var render = function() {
     "div",
     { staticClass: "guest-photos" },
     [
-      _c("Swiper", { attrs: { images: _vm.images } }),
-      _vm._v(" "),
-      !_vm.images.length
-        ? _c("p", [_vm._v("No user provided images yet.")])
+      _vm.images.length
+        ? _c("Swiper", { attrs: { images: _vm.images } })
         : _vm._e(),
       _vm._v(" "),
-      _c("a", { staticClass: "button all-photos", attrs: { href: _vm.url } }, [
-        _vm._v("View All")
-      ])
+      !_vm.images.length ? _c("p", [_vm._v("No user images yet.")]) : _vm._e(),
+      _vm._v(" "),
+      _vm.images.length
+        ? _c(
+            "a",
+            { staticClass: "button all-photos", attrs: { href: _vm.url } },
+            [_vm._v("View All")]
+          )
+        : _vm._e()
     ],
     1
   )

@@ -1,8 +1,8 @@
 <template>
     <div class="guest-photos">
-        <Swiper :images="images" />
-        <p v-if="!images.length">No user provided images yet.</p>
-        <a :href="url" class="button all-photos">View All</a>
+        <Swiper :images="images" v-if="images.length"/>
+        <p v-if="!images.length">No user images yet.</p>
+        <a :href="url" class="button all-photos" v-if="images.length">View All</a>
     </div>
 </template>
 
