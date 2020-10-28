@@ -15,7 +15,7 @@ class Review extends Model
 
     protected $guarded = [];
     public $timestamps = true;
-    public $with = ['author'];
+    public $with = ['author', 'image', 'reply'];
     public $casts = [
         'showcased' => 'boolean'
     ];

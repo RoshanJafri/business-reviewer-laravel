@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('/businesses/{business}/review', 'ReviewController@index')->name('reviews.index');
+Route::get('/businesses/review/{review}', 'ReviewController@fetch');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/businesses/create', 'BusinessController@create');
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/businesses/{business}/images', 'BusinessImageController@create');
 
     Route::post('/reviews/{review}/react', 'ReviewReactionController@store')->name('reviews.react');
+    Route::post('/reviews/{review}/showcase/remove', 'ReviewShowcaseController@remove')->name('reviews.remove');
+
     Route::post('/reviews/{review}/showcase', 'ReviewShowcaseController@store')->name('reviews.showcase');
     // Route::delete('/reviews/{review}/react', 'ReviewReactionController@delete')->name('reviews.remove');
 

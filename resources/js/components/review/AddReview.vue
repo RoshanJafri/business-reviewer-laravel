@@ -1,5 +1,7 @@
 <template>
-<div class="mt-5" id="add-review">
+<div class="mt-5" id="add-review" v-if="!reviewSubmitted">
+    <h3 class="font-bold text-2xl mb-6">Been here? Add a review!</h3>
+    <hr>
     <div class="py-4" v-if="user">
         <div class=" mt-2 flex">
             <UserCard :author="user" />
@@ -34,6 +36,8 @@
 
 <script>
 import UserCard from './UserCard';
+import {reviewBus} from '../../app.js';
+
 export default {
   props: {
     urlPath: {
@@ -47,6 +51,7 @@ export default {
       rating: 1,
       error: '',
       image: null, 
+      reviewSubmitted: false
     }
   },
   components: {
@@ -65,7 +70,17 @@ export default {
       if (!this.body) {
         return this.error = 'Please provide text when reviewing!';
       }
-      axios.post(this.urlPath, {body, rating, image });
+      const formData = new FormData();
+
+      if (this.image) {
+        formData.append('image', this.image);
+      }
+
+      formData.append('rating', this.rating);
+      formData.append('body', this.body);
+
+      axios.post(this.urlPath, formData).then(() => reviewBus.$emit('review_added', this.review));
+      this.reviewSubmitted = true;
     },
     uploadImage(e) {
       this.imageUploaded = true;

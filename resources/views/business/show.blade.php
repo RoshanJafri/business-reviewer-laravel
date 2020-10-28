@@ -37,16 +37,10 @@
         @include('business.components.map')
 
         @can('addReview', $business)
-        <h3 class="font-bold text-2xl mb-6">Been here? Add a review!</h3>
-        <hr>
-        {{-- <x-add-review :business="$business" /> --}}
         <add-review :url-path="'{{ "/businesses/". $business->slug ."/review" }}'"></add-review>
         @endcan
-
-        <h3 class="font-bold text-2xl mt-6 mb-4">Reviews ({{ $business->reviewCount() }})</h3>
-        <hr>
-
-        <reviews></reviews>
+        <reviews :current-user-is-owner="{{Auth::check() && Auth::user()->ownerOf($business) ? 'true' : 'false' }}">
+        </reviews>
 
 
     </section>

@@ -1,11 +1,17 @@
 <template>
     <div class="flex items-start" style="width: 35% !important;">
-        <img
-            :src="`https://www.gravatar.com/avatar/{{ ${author.email} }}?s=60`"
+
+        <img v-if="author.avatar" width="60"  class="rounded" :src="avatarUrl" :alt="`${author.name} ${author.surname}`" :title="`${author.name} ${author.surname}`">
+
+        <img v-else
+            :src="`https://ui-avatars.com/api/?name=${author.name}&color=7F9CF5&background=EBF4FF`"
             width="60"
             class="rounded"
             :alt="author.name"
         />
+
+
+
         <div class="ml-2">
             <h5>
                 <strong>{{ author.name }}</strong>
@@ -36,8 +42,13 @@ export default {
         author: {
             type: Object,
             required: true
+        },
+    },
+    computed: {
+            avatarUrl() {
+                return `${window.location.origin}/storage/${this.author.avatar.image_path}`;
+            }
         }
-    }
 };
 </script>
 

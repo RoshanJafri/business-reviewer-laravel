@@ -2,74 +2,71 @@
     <li class=" mb-2 rounded">
         <div class="flex w-full">
             <!-- <x-user-card :user="$review->author" /> -->
-            <UserCard :author="review.author" />
+            <UserCard :author="reviewData.author" />
             <div class="flex-1 items-between">
                 <div class="flex justify-between">
                     <StarRating
-                        :rating="review.rating"
-                        :createdAt="review.created_at"
+                        :rating="reviewData.rating"
+                        :createdAt="reviewData.created_at"
                         :small="true"
                     />
-
-                    <p v-if="review.showcased">I have been showcased</p>
                 </div>
-                <p>{{ review.body }}</p>
+                <p>{{ reviewData.body }}</p>
 
-                <!-- @if($review->image)
-                <img
-                    src="{{ asset($review->image->path()) }}"
-                    alt="{{ $review->author->name }}"
+       
+            <div v-if="reviewData.image">
+                <button type="button" class="underline text-red-600" @click="toggleImageView">Show Uploaded Image</button>
+                <img 
+                    v-if="showImage"
+                    :src="imageUrl"
+                    :alt="reviewData.image.updated_at"
                     class="block w-full"
-                />
-                @endif  -->
-                <!-- @if($review->reply)
-                <div class="p-4 w-full mt-4 bg-gray-200">
-                    <span class="text-gray-600">Owner reply:</span>
-                    <p>{{  $review->reply->body }}</p>
-                </div>
-                @endif @can('reply', $review)
-                <div class="mt-6 mt-5">
-                    <form
-                        action="/businesses/review/{{ $review->id }}/reply"
-                        method="POST"
-                    >
+                >
+            </div>
+          
+                <div class="p-4 w-full mt-4 bg-gray-200" v-if="reviewData.reply">
+                    <span class="text-gray-600">Owners reply:</span>
+                    <p>{{reviewData.reply.body}}</p>
+                </div> 
+
+                <div class="mt-6 mt-5" v-if="currentUserIsOwner && !reviewData.reply">
                         <textarea
                             name="body"
                             rows="2"
                             class="w-full border-2 p-2"
+                            v-model="replyInput"
                         ></textarea>
-                        <button type="submit" class="text-black-200">
+                        <button type="submit" class="text-black-200" @click="addReply">
                             Add Reply
                         </button>
-                        @csrf
-                    </form>
                 </div>
-                @endcan -->
-                <!-- <div class="flex justify-between mt-5">
+    
+                <div class="flex justify-between mt-5">
                     <div class="reactions flex">
-                        @include('svgs.smile') @include('svgs.wink')
+                        <!-- @include('svgs.UsefulReaction') @include('svgs.wink') -->
+                        <UsefulReaction></UsefulReaction>
+                        <WinkReaction></WinkReaction>
                     </div>
-                    @can('update', $business) @if($review->showcased)
-                    <form
-                        action="{{ route('reviews.showcase', $review->id) }}"
-                        method="POST"
-                    >
-                        @method('DELETE') @csrf
-                        <button type="submit">Remove Showcase</button>
+                    
+
+    <!-- action="{{ route('reviews.showcase', $review->id) }}"  -->
+                <div v-if="currentUserIsOwner">
+                    <form method="POST" v-if="isShowcased">
+                        <button type="button" @click="removeShowcase">Remove Showcase</button>
                     </form>
-                    @else
-                    <form
-                        action="{{ route('reviews.showcase', $review->id) }}"
-                        method="POST"
-                    >
-                        @csrf
-                        <button type="submit">Showcase</button>
+                   
+
+
+                    <form method="POST" v-if="!isShowcased">
+                        <button type="button" @click="addShowcase">Showcase</button>
                     </form>
-                    @endif @endcan
-                </div> -->
-                <!-- </div> -->
+                
+                </div>
+                </div>
+
+                </div>
+
             </div>
-        </div>
         <hr class="my-5" />
     </li>
 </template>
@@ -77,18 +74,68 @@
 <script>
 import StarRating from "../StarRating.vue";
 import UserCard from "./UserCard.vue";
+import UsefulReaction from "./UsefulReaction.vue";
+import WinkReaction from "./WinkReaction.vue";
 
 export default {
     components: {
         StarRating,
-        UserCard
+        UserCard,
+        UsefulReaction,
+        WinkReaction
+    },
+    data() {
+        return {
+            reviewData: this.review,
+            isShowcased: this.review.showcased,
+            showImage: false,
+            replyInput: ''
+        }
     },
     props: {
         review: {
             type: Object,
             required: true
+        },
+        currentUserIsOwner: {
+            type: Boolean,
+            required: true
         }
-    }
+    },
+    methods: {
+        toggleImageView() {
+            this.showImage = !this.showImage;
+        },
+        addReply() {
+            if (!this.replyInput) {
+               return; // add error
+            }
+            axios.post(`/businesses/review/${this.reviewData.id}/reply`, {body: this.replyInput}).then(() => this.refreshCurrentReview());
+
+        }, 
+        refreshCurrentReview() {
+            axios.get(`/businesses/review/${this.reviewData.id}`).then(res => {
+                this.reviewData = res.data.review;
+            });
+        },
+        addShowcase() {
+            axios.post(`/reviews/${this.reviewData.id}/showcase`).then(() => {
+                this.refreshCurrentReview();
+                this.isShowcased = true;
+            });
+        },
+        removeShowcase() {
+             axios.post(`/reviews/${this.reviewData.id}/showcase/remove`).then(() => {
+                 this.refreshCurrentReview();
+                 this.isShowcased = false;
+             });
+        }
+    },
+    computed: {
+        imageUrl() {
+            return `${window.location.origin}/storage//${this.reviewData.image.image_path}`;;
+        },
+    },
 };
 </script>
 

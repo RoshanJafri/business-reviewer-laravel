@@ -13,6 +13,7 @@ class ReplyController extends Controller
         $this->authorize('reply', $review);
 
         $review->addReply($request['body']);
+        
         return back();
     }
 }

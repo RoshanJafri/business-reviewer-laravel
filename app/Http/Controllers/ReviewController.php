@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\Review;
 
 use Illuminate\Http\Request;
 
@@ -30,5 +31,10 @@ class ReviewController extends Controller
             $business->addReview($attributes['body'], $attributes['rating']);
 
         return redirect($business->path());
+    }
+
+    public function fetch(Review $review)
+    {
+        return compact('review');
     }
 }
