@@ -7,22 +7,22 @@
             <UserCard :author="user" />
             <div class="w-full flex-1">
                 <form @submit.prevent="submitReview" method="POST" enctype="multipart/form-data">
-                    <!-- <div class="mb-3">
-                        <input type="file" name="image" accept="image/*" @change="uploadImage">
-                    </div> -->
 
                     <textarea name="body" id="" rows="5" v-model="body"
                         class="block w-full border-2 border-gray-300 rounded"></textarea>
 
                         <img :src="imageUrl" alt="" v-if="image" class="mt-4 rounded w-32">
            
-                    <div class="mb-3">
-                      <label class="flex items-center">Rating:
-                        <select name="rating" class="block border-2 border-gray-200 rounded mt-3" v-model="rating">
-                            <option :value="n" v-for="n in 5" :key="n">{{n}}</option>
-                        </select>
-                        </label>
+                    <div class="mb-3 flex justify-between">
+                      <AddReviewStars @ratingChanged="setRating"/>
+                          <button type="button" class="block" @click="addImage = !addImage">Include Image</button>
                     </div>
+
+                  <div class="mb-3" v-if="addImage">
+                        <input type="file" name="image" accept="image/*" @change="uploadImage">
+                    </div>
+        
+
                     <p class="text-sm text-red-400" v-if="error">{{error}}</p>
              
                     <button type="submit" class="bg-red-500 button text-white ml-auto mt-3">Submit Review</button>
@@ -39,6 +39,7 @@
 <script>
 import UserCard from './UserCard';
 import {reviewBus} from '../../app.js';
+import AddReviewStars from './AddReviewStars.vue';
 
 export default {
   props: {
@@ -52,12 +53,14 @@ export default {
       body: '',
       rating: 1,
       error: '',
+      addImage: false,
       image: null, 
-      reviewSubmitted: false
+      reviewSubmitted: false,
     }
   },
   components: {
-    UserCard
+    UserCard,
+    AddReviewStars
   },
   computed: {
     user() {
@@ -87,6 +90,9 @@ export default {
     uploadImage(e) {
       this.imageUploaded = true;
       this.image = e.target.files[0];
+    },
+    setRating(rating) {
+      this.rating = rating;
     }
   }
 }
