@@ -1,11 +1,10 @@
 <template>
     <div class="flex items-start user-card">
 
-        <img v-if="author.avatar" width="60"  class="rounded" :src="avatarUrl" :alt="`${author.name} ${author.surname}`" >
+        <img v-if="author.avatar" width="60"  class="rounded reviewer-avatar" :src="avatarUrl" :alt="`${author.name} ${author.surname}`" >
 
         <img v-else
             :src="`https://ui-avatars.com/api/?name=${author.name}&color=7F9CF5&background=EBF4FF`"
-            width="60"
             class="rounded"
             :alt="author.name"
         />
@@ -63,6 +62,11 @@ export default {
 <style scoped>
 .user-card {
     width: 100%;
+}
+.reviewer-avatar {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
 }
 
 @media only screen and (min-width: 1024px) {

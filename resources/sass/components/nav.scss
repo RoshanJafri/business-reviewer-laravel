@@ -13,3 +13,9 @@
         @apply .bg-white .text-red-400 .border-red-400;
     }
 }
+
+.avatar {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+}

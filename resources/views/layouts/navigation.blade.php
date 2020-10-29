@@ -20,7 +20,7 @@
 
                 <button class="flex items-center focus:outline-none  focus:text-gray-600" id="nav-dropdown"
                     aria-haspopup="true" aria-expanded="true">
-                    <img src="{{ Auth::user()->displayAvatar() }}" width="30" class="rounded-full avatar"
+                    <img src="{{ Auth::user()->displayAvatar() }}" class="rounded-full avatar"
                         alt="{{ Auth::user()->name }}">
                     <p class="ml-1 font-normal">{{ Auth::user()->name }}</p>
                 </button>

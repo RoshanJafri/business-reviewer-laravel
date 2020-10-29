@@ -1,5 +1,5 @@
 <template>
-    <li class=" mb-2 rounded">
+    <li class=" mb-2 rounded review">
         <div class="lg:flex w-full">
             <!-- <x-user-card :user="$review->author" /> -->
             <UserCard :author="reviewData.author" />
@@ -78,7 +78,6 @@
                 </div>
             </div>
         </div>
-        <hr class="my-5" />
     </li>
 </template>
 
@@ -163,4 +162,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.review {
+    padding: 25px 0;
+    border-bottom: solid 1px #edf2f7;
+}
+</style>

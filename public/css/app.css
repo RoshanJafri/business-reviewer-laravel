@@ -205,6 +205,13 @@ body {
   border-color: rgba(252, 129, 129, var(--border-opacity));
 }
 
+.avatar {
+  height: 30px;
+  width: 30px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .authentication__form {
   width: 380px;
   margin: 0 auto;
