@@ -100,7 +100,9 @@ export default {
             reviewData: this.review,
             isShowcased: this.review.showcased,
             showImage: false,
-            replyInput: ""
+            replyInput: "",
+            funny: 0,
+            useful: 0
         };
     },
     props: {
@@ -146,8 +148,8 @@ export default {
                     this.isShowcased = false;
                 });
         },
-        reactionHandler(type) {
-            axios.post(`/reviews/${this.reviewData.id}/react`, {type});
+        async reactionHandler(type) {
+            const res = await axios.post(`/reviews/${this.reviewData.id}/react`, {type});
         }
     },
     computed: {

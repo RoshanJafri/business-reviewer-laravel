@@ -13,7 +13,6 @@
             </g>
         </svg> 
         <span class="mx-2 text-sm">Useful</span>
-        <span class="text-sm">{{ count }}</span>
         </div>
 
 
@@ -39,12 +38,11 @@ export default {
     reacted: {
       type: Boolean,
       required: true
-    }
+    },
   },
   data() {
     return {
       isActive: this.reacted,
-      count: 0
     }
   },
   methods:{

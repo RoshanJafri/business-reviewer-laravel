@@ -12,7 +12,6 @@
               </g>
           </svg>
           <span class="mx-2 text-sm">Funny</span>
-          <span class="text-sm">{{count}}</span>
         </div>
         <div v-else  class="flex">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 26">
@@ -48,7 +47,6 @@ export default {
   data() {
     return {
       isActive: this.reacted,
-      count: 0
     }
   },
   methods:{
