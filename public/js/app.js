@@ -2077,6 +2077,10 @@ __webpack_require__.r(__webpack_exports__);
     businessSlug: {
       type: String,
       required: true
+    },
+    currentUserIsOwner: {
+      type: Boolean,
+      required: true
     }
   },
   data: function data() {
@@ -2506,6 +2510,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2522,7 +2537,7 @@ __webpack_require__.r(__webpack_exports__);
       reviewData: this.review,
       isShowcased: this.review.showcased,
       showImage: false,
-      replyInput: ''
+      replyInput: ""
     };
   },
   props: {
@@ -2576,12 +2591,19 @@ __webpack_require__.r(__webpack_exports__);
 
         _this4.isShowcased = false;
       });
+    },
+    reactionHandler: function reactionHandler(type) {
+      axios.post("/reviews/".concat(this.reviewData.id, "/react"), {
+        type: type
+      });
     }
   },
   computed: {
     imageUrl: function imageUrl() {
       return "".concat(window.location.origin, "/storage//").concat(this.reviewData.image.image_path);
-      ;
+    },
+    user: function user() {
+      return currentUser;
     }
   }
 });
@@ -2779,16 +2801,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    reacted: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: function data() {
     return {
-      isActive: false,
+      isActive: this.reacted,
       count: 0
     };
   },
   methods: {
     addReaction: function addReaction() {
-      console.log('useful');
-      this.isActive = true;
+      this.$emit('reaction', 'useful');
+      this.isActive = !this.isActive;
     }
   }
 });
@@ -2915,16 +2943,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    reacted: {
+      type: Boolean,
+      required: true
+    }
+  },
   data: function data() {
     return {
-      isActive: false,
+      isActive: this.reacted,
       count: 0
     };
   },
   methods: {
     addReaction: function addReaction() {
-      this.isActive = true;
-      console.log('wink');
+      this.$emit('reaction', 'funny');
+      this.isActive = !this.isActive;
     }
   }
 });
@@ -38621,7 +38655,10 @@ var render = function() {
                 _vm._l(_vm.reviews, function(review) {
                   return _c("ShowcasedReview", {
                     key: review.id,
-                    attrs: { review: review }
+                    attrs: {
+                      review: review,
+                      currentUserIsOwner: _vm.currentUserIsOwner
+                    }
                   })
                 }),
                 1
@@ -39010,7 +39047,11 @@ var render = function() {
                     attrs: { type: "button" },
                     on: { click: _vm.toggleImageView }
                   },
-                  [_vm._v("Show Uploaded Image")]
+                  [
+                    _vm._v(
+                      "\n                    Show Uploaded Image\n                "
+                    )
+                  ]
                 ),
                 _vm._v(" "),
                 _vm.showImage
@@ -39066,22 +39107,30 @@ var render = function() {
                     attrs: { type: "submit" },
                     on: { click: _vm.addReply }
                   },
-                  [
-                    _vm._v(
-                      "\n                        Add Reply\n                    "
-                    )
-                  ]
+                  [_vm._v("\n                    Add Reply\n                ")]
                 )
               ])
             : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between mt-5" }, [
-            _c(
-              "div",
-              { staticClass: "reactions flex" },
-              [_c("UsefulReaction"), _vm._v(" "), _c("WinkReaction")],
-              1
-            ),
+            _vm.user
+              ? _c(
+                  "div",
+                  { staticClass: "reactions flex" },
+                  [
+                    _c("UsefulReaction", {
+                      attrs: { reacted: _vm.reviewData.isReactedUseful },
+                      on: { reaction: _vm.reactionHandler }
+                    }),
+                    _vm._v(" "),
+                    _c("WinkReaction", {
+                      attrs: { reacted: _vm.reviewData.isReactedFunny },
+                      on: { reaction: _vm.reactionHandler }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
             _vm._v(" "),
             _vm.currentUserIsOwner
               ? _c("div", [
@@ -39093,7 +39142,11 @@ var render = function() {
                             attrs: { type: "button" },
                             on: { click: _vm.removeShowcase }
                           },
-                          [_vm._v("Remove Showcase")]
+                          [
+                            _vm._v(
+                              "\n                            Remove Showcase\n                        "
+                            )
+                          ]
                         )
                       ])
                     : _vm._e(),
@@ -39106,7 +39159,11 @@ var render = function() {
                             attrs: { type: "button" },
                             on: { click: _vm.addShowcase }
                           },
-                          [_vm._v("Showcase")]
+                          [
+                            _vm._v(
+                              "\n                            Showcase\n                        "
+                            )
+                          ]
                         )
                       ])
                     : _vm._e()

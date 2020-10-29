@@ -14,10 +14,12 @@ class Review extends Model
     use Reactionable;
 
     protected $guarded = [];
+    protected $appends = ['isReactedFunny', 'isReactedUseful'];
     public $timestamps = true;
     public $with = ['author', 'image', 'reply'];
     public $casts = [
-        'showcased' => 'boolean'
+        'showcased' => 'boolean',
+
     ];
 
     public function author()
@@ -53,5 +55,23 @@ class Review extends Model
     public function usefulCount()
     {
         return $this->reactions()->where(['type' => 'useful'])->count();
+    }
+
+    public function getIsReactedFunnyAttribute()
+    {
+      if (auth()->user()) {
+       return $this->reactionExists('funny');
+      }
+
+      return false;
+    }
+
+     public function getIsReactedUsefulAttribute()
+    {
+      if (auth()->user()) {
+        return $this->reactionExists('useful');
+      }
+
+      return false;
     }
 }

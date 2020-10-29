@@ -34,14 +34,12 @@ class ReviewController extends Controller
     }
 
 
-    // test this
     public function fetch(Review $review)
     {
         return compact('review');
     }
 
 
-    // test this
     public function showcased(Business $business)
     {
        $showcasedReviews =  $business->reviews()->where('showcased', true)->get();

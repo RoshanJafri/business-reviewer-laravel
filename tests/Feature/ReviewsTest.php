@@ -111,7 +111,7 @@ class ReviewsTest extends TestCase
 
     public function test_only_the_owner_of_the_business_can_showcase_a_review()
     {
-        $user = $this->signIn();
+        $this->signIn();
         $business = BusinessFactory::create();
 
         $review = $business->addReview('An amazing place where ...', 5, null);
@@ -126,20 +126,29 @@ class ReviewsTest extends TestCase
         $business = BusinessFactory::create(['owner_id' => $user]);
 
         $firstReview = $business->addReview('An amazing place where ...', 5, null);
-        $seconReview = $business->addReview('Best pizza in town ...', 5, null);
+        $secondReview = $business->addReview('Best pizza in town ...', 5, null);
 
-        $this->post(route('reviews.showcase', $firstReview->id))->assertRedirect($business->path());
+        $this->post(route('reviews.showcase', $firstReview->id));
         $this->assertTrue($firstReview->fresh()->showcased);
-        $this->assertFalse($seconReview->fresh()->showcased);
+        $this->assertFalse($secondReview->fresh()->showcased);
 
-        $this->post(route('reviews.showcase', $seconReview->id))->assertRedirect($business->path());
-        $this->assertFalse($firstReview->fresh()->showcased);
-        $this->assertTrue($seconReview->fresh()->showcased);
+         $this->post(route('reviews.showcase', $secondReview->id));
+         $this->assertTrue($secondReview->fresh()->showcased);
+         $this->assertTrue($firstReview->fresh()->showcased);
     }
 
     public function test_returns_reviews_in_json_format_if_so_requested()
     {
         $business = BusinessFactory::withReviews(3)->create();
-        $this->getJson($business->path() . '/review')->assertStatus(200);
+        $this->getJson($business->path() . '/review')
+            ->assertStatus(200)
+            ->assertJsonCount(3);
+    }
+
+    public function test_can_retrieve_a_single_review () {
+    
+        $business = BusinessFactory::withReviews(3)->create();
+        $this->getJson('/businesses/review/' . $business->reviews[0]->id)
+            ->assertJsonCount(1);
     }
 }

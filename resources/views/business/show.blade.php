@@ -22,7 +22,9 @@
         <hr class="my-3">
 
 
-        <showcasedreviews :business-slug="'{{ $business->slug }}'"></showcasedreviews>
+        <showcasedreviews :business-slug="'{{ $business->slug }}'"
+            :current-user-is-owner="{{Auth::check() && Auth::user()->ownerOf($business) ? 'true' : 'false' }}">
+        </showcasedreviews>
 
 
 

@@ -39,16 +39,22 @@
 
 <script>
 export default {
+  props: {
+    reacted: {
+      type: Boolean,
+      required:true
+    }
+  },
   data() {
     return {
-      isActive: false,
+      isActive: this.reacted,
       count: 0
     }
   },
   methods:{
     addReaction() {
-      this.isActive = true;
-      console.log('wink');
+      this.$emit('reaction', 'funny');
+      this.isActive = !this.isActive;
     }
   } 
 

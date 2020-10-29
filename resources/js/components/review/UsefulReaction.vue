@@ -35,16 +35,22 @@
 
 <script>
 export default {
+  props: {
+    reacted: {
+      type: Boolean,
+      required: true
+    }
+  },
   data() {
     return {
-      isActive: false,
+      isActive: this.reacted,
       count: 0
     }
   },
   methods:{
     addReaction() {
-      console.log('useful');
-      this.isActive = true;
+      this.$emit('reaction', 'useful');
+      this.isActive = !this.isActive;
     }
   } 
 
