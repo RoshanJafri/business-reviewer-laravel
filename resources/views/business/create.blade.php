@@ -53,7 +53,8 @@
 
 
         <div class="py-3 flex flex-col">
-            <label for="phone_number">Location</label>
+            <label for="location">Location</label>
+            <input type="hidden" name="geo_location" value="" id="geo-location">
             @section('head')
             <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
             <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css" />
@@ -68,16 +69,25 @@
                     var map = L.mapquest.map('map', {
                         center: [37.7749, -122.4194],
                         layers: L.mapquest.tileLayer('map'),
-                        zoom: 15
+                        zoom: 1
                     });
 
-                    marker = L.marker([45, -120], {
+                    let marker;
+
+                    map.on('click', (e) => {
+                        if (marker) {
+                            marker.remove();
+                        }
+
+                        const markerCoords = [e.latlng.lat, e.latlng.lng];
+
+                        marker = L.marker(markerCoords, {
                             draggable: true
-                        })
-                        .addTo(map)
-                        .on('dragend', function (e) {
-                            console.log(e.target._latlng);
-                        });
+                        }).addTo(map);
+
+                        document.querySelector('#geo-location').value = JSON.stringify(markerCoords);
+                    });
+
                 }
 
             </script>

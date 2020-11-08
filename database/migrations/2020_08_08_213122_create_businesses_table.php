@@ -24,6 +24,7 @@ class CreateBusinessesTable extends Migration
             $table->string('website_url');
             $table->string('email');
             $table->string('slug')->unique();
+            $table->string('geo_location');
 
             $table->text('description');
 

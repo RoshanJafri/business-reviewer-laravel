@@ -12,7 +12,6 @@
         @foreach ($business->categories as $category)
         <span class="italic text-md text-gray-600">{{ $category->name }} </span>
         @if(!$loop->last)
-        /
         @endif
         @endforeach
 

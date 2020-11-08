@@ -22,6 +22,7 @@ $factory->define(Business::class, function (Faker $faker) {
         'city' => $faker->city,
         'phone_number' => $faker->phoneNumber,
         'email' => $faker->email,
+        'geo_location' => json_encode([$faker->latitude, $faker->longitude]),
         'website_url' => 'https://www' . Str::slug($name, '') . '.com'
     ];
 });
