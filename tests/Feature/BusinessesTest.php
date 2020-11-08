@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Business;
 use App\Category;
 use Tests\TestCase;
+use Illuminate\Support\Str;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Facades\Tests\Setup\BusinessFactory;
@@ -62,8 +63,8 @@ class BusinessesTest extends TestCase
         $bannerCave = BusinessFactory::create();
 
         $this->get('/businesses')
-            ->assertSee($wakandaCity->name)
-            ->assertSee($bannerCave->name);
+            ->assertSee(Str::limit($wakandaCity->name, 50))
+            ->assertSee(Str::limit($bannerCave->name, 50));
     }
 
     public function test_a_guest_can_view_business_and_reviews()
