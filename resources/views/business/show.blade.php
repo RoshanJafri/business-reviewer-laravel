@@ -23,7 +23,7 @@
             <div class="w-full flex mb-4">
                 @if(Auth::check())
                 <button href="#" @click="openModal('add-image')"
-                    class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add
+                    class="bg-red-500 text-white mr-1 button hover:bg-red-200">Add
                     Photo</button>
                 @endif
             </div>
@@ -57,7 +57,7 @@
         <div class="w-full flex mb-4">
             @if(Auth::check())
             <button href="#" @click="openModal('add-image')"
-                class="bg-red-600 text-white mr-1 button hover:bg-red-500">Add
+                class="bg-red-500 text-white mr-1 button hover:bg-red-400">Add
                 Photo</button>
             @endif
         </div>

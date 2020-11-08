@@ -9,7 +9,7 @@
                 <form @submit.prevent="submitReview" method="POST" enctype="multipart/form-data">
 
                     <textarea name="body" id="" rows="5" v-model="body"
-                        class="block w-full border-2 border-gray-300 rounded"></textarea>
+                        class="block w-full border-2 border-gray-300 p-3 rounded"></textarea>
 
                         <img :src="imageUrl" alt="" v-if="image" class="mt-4 rounded w-32">
            
@@ -25,7 +25,7 @@
 
                     <p class="text-sm text-red-400" v-if="error">{{error}}</p>
              
-                    <button type="submit" class="bg-red-500 button text-white ml-auto mt-3">Submit Review</button>
+                    <button type="submit" class="bg-red-500 hover:bg-red-400 button text-white ml-auto mt-3">Submit Review</button>
                 </form>
             </div>
 

@@ -39832,7 +39832,7 @@ var render = function() {
                             }
                           ],
                           staticClass:
-                            "block w-full border-2 border-gray-300 rounded",
+                            "block w-full border-2 border-gray-300 p-3 rounded",
                           attrs: { name: "body", id: "", rows: "5" },
                           domProps: { value: _vm.body },
                           on: {
@@ -39900,7 +39900,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-red-500 button text-white ml-auto mt-3",
+                              "bg-red-500 hover:bg-red-400 button text-white ml-auto mt-3",
                             attrs: { type: "submit" }
                           },
                           [_vm._v("Submit Review")]
