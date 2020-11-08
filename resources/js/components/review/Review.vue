@@ -4,13 +4,13 @@
             <!-- <x-user-card :user="$review->author" /> -->
             <UserCard :author="reviewData.author" />
             <div class="flex-1 items-between">
-                <div class="flex justify-between">
+
                     <StarRating
                         :rating="reviewData.rating"
                         :createdAt="reviewData.created_at"
                         :small="true"
                     />
-                </div>
+  
                 <p>{{ reviewData.body }}</p>
 
                 <div v-if="reviewData.image">

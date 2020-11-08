@@ -1,5 +1,5 @@
 <template>
-    <div class="stars-container flex my-3" :title="rating">
+    <div class="stars-container flex my-5" :title="rating">
         <img
             :src="getAsset('images', 'star-full.svg')"
             class="rating-stars"
@@ -52,7 +52,7 @@ export default {
     },
     computed: {
         parseDate() {
-            return new Date(this.createdAt).toLocaleString();
+            return new Date(this.createdAt).toLocaleString().split(',')[0];
         }
     }
 };

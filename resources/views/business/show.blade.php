@@ -5,7 +5,7 @@
 </div>
 <div class="business lg:flex">
     <section class="business_main flex-1 overflow-hidden">
-        <h1 class="text-4xl font-bold">{{ $business->name }} <small
+        <h1 class="md:text-4xl text-3xl font-bold">{{ $business->name }} <small
                 class="text-gray-700 text-sm italic">{{ $business->viewCount() }} views</small></h1>
         <x-star-rating :rating="$business->average_review" :string="$business->reviews->count().' Reviews'" />
 

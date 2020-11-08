@@ -30,6 +30,12 @@ body {
   width: 100%;
 }
 
+@media only screen and (max-width: 768px) {
+  .heading-image {
+    height: 256px;
+  }
+}
+
 .heading-image img {
   width: 100%;
   height: 100%;
@@ -48,7 +54,12 @@ body {
 
 .business_main {
   padding-bottom: 150px;
-  margin-right: 20px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .business_main {
+    margin-right: 20px;
+  }
 }
 
 .business_main .stars-container > *:not(:first-child) {

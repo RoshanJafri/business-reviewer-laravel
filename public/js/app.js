@@ -2174,7 +2174,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     parseDate: function parseDate() {
-      return new Date(this.createdAt).toLocaleString();
+      return new Date(this.createdAt).toLocaleString().split(',')[0];
     }
   }
 });
@@ -39633,7 +39633,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "stars-container flex my-3", attrs: { title: _vm.rating } },
+    { staticClass: "stars-container flex my-5", attrs: { title: _vm.rating } },
     [
       _vm._l(_vm.fullStars, function(n) {
         return _c("img", {
@@ -40036,157 +40036,159 @@ var render = function() {
       [
         _c("UserCard", { attrs: { author: _vm.reviewData.author } }),
         _vm._v(" "),
-        _c("div", { staticClass: "flex-1 items-between" }, [
-          _c(
-            "div",
-            { staticClass: "flex justify-between" },
-            [
-              _c("StarRating", {
-                attrs: {
-                  rating: _vm.reviewData.rating,
-                  createdAt: _vm.reviewData.created_at,
-                  small: true
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(_vm.reviewData.body))]),
-          _vm._v(" "),
-          _vm.reviewData.image
-            ? _c("div", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "underline text-red-600",
-                    attrs: { type: "button" },
-                    on: { click: _vm.toggleImageView }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    Show Uploaded Image\n                "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _vm.showImage
-                  ? _c("img", {
-                      staticClass: "block w-full",
-                      attrs: {
-                        src: _vm.imageUrl,
-                        alt: _vm.reviewData.image.updated_at
-                      }
-                    })
-                  : _vm._e()
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.reviewData.reply
-            ? _c("div", { staticClass: "p-4 w-full mt-4 bg-gray-200" }, [
-                _c("span", { staticClass: "text-gray-600" }, [
-                  _vm._v("Owners reply:")
-                ]),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(_vm.reviewData.reply.body))])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.currentUserIsOwner && !_vm.reviewData.reply
-            ? _c("div", { staticClass: "mt-6 mt-5" }, [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.replyInput,
-                      expression: "replyInput"
-                    }
-                  ],
-                  staticClass: "w-full border-2 p-2",
-                  attrs: { name: "body", rows: "2" },
-                  domProps: { value: _vm.replyInput },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.replyInput = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "text-black-200",
-                    attrs: { type: "submit" },
-                    on: { click: _vm.addReply }
-                  },
-                  [_vm._v("\n                    Add Reply\n                ")]
-                )
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex justify-between mt-5" }, [
-            _vm.user
-              ? _c(
-                  "div",
-                  { staticClass: "reactions flex" },
-                  [
-                    _c("UsefulReaction", {
-                      attrs: { reacted: _vm.reviewData.isReactedUseful },
-                      on: { reaction: _vm.reactionHandler }
-                    }),
-                    _vm._v(" "),
-                    _c("WinkReaction", {
-                      attrs: { reacted: _vm.reviewData.isReactedFunny },
-                      on: { reaction: _vm.reactionHandler }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
+        _c(
+          "div",
+          { staticClass: "flex-1 items-between" },
+          [
+            _c("StarRating", {
+              attrs: {
+                rating: _vm.reviewData.rating,
+                createdAt: _vm.reviewData.created_at,
+                small: true
+              }
+            }),
             _vm._v(" "),
-            _vm.currentUserIsOwner
+            _c("p", [_vm._v(_vm._s(_vm.reviewData.body))]),
+            _vm._v(" "),
+            _vm.reviewData.image
               ? _c("div", [
-                  _vm.isShowcased
-                    ? _c("form", { attrs: { method: "POST" } }, [
-                        _c(
-                          "button",
-                          {
-                            attrs: { type: "button" },
-                            on: { click: _vm.removeShowcase }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            Remove Showcase\n                        "
-                            )
-                          ]
-                        )
-                      ])
-                    : _vm._e(),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "underline text-red-600",
+                      attrs: { type: "button" },
+                      on: { click: _vm.toggleImageView }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Show Uploaded Image\n                "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
-                  !_vm.isShowcased
-                    ? _c("form", { attrs: { method: "POST" } }, [
-                        _c(
-                          "button",
-                          {
-                            attrs: { type: "button" },
-                            on: { click: _vm.addShowcase }
-                          },
-                          [
-                            _vm._v(
-                              "\n                            Showcase\n                        "
-                            )
-                          ]
-                        )
-                      ])
+                  _vm.showImage
+                    ? _c("img", {
+                        staticClass: "block w-full",
+                        attrs: {
+                          src: _vm.imageUrl,
+                          alt: _vm.reviewData.image.updated_at
+                        }
+                      })
                     : _vm._e()
                 ])
-              : _vm._e()
-          ])
-        ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.reviewData.reply
+              ? _c("div", { staticClass: "p-4 w-full mt-4 bg-gray-200" }, [
+                  _c("span", { staticClass: "text-gray-600" }, [
+                    _vm._v("Owners reply:")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.reviewData.reply.body))])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.currentUserIsOwner && !_vm.reviewData.reply
+              ? _c("div", { staticClass: "mt-6 mt-5" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.replyInput,
+                        expression: "replyInput"
+                      }
+                    ],
+                    staticClass: "w-full border-2 p-2",
+                    attrs: { name: "body", rows: "2" },
+                    domProps: { value: _vm.replyInput },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.replyInput = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "text-black-200",
+                      attrs: { type: "submit" },
+                      on: { click: _vm.addReply }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Add Reply\n                "
+                      )
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex justify-between mt-5" }, [
+              _vm.user
+                ? _c(
+                    "div",
+                    { staticClass: "reactions flex" },
+                    [
+                      _c("UsefulReaction", {
+                        attrs: { reacted: _vm.reviewData.isReactedUseful },
+                        on: { reaction: _vm.reactionHandler }
+                      }),
+                      _vm._v(" "),
+                      _c("WinkReaction", {
+                        attrs: { reacted: _vm.reviewData.isReactedFunny },
+                        on: { reaction: _vm.reactionHandler }
+                      })
+                    ],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.currentUserIsOwner
+                ? _c("div", [
+                    _vm.isShowcased
+                      ? _c("form", { attrs: { method: "POST" } }, [
+                          _c(
+                            "button",
+                            {
+                              attrs: { type: "button" },
+                              on: { click: _vm.removeShowcase }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Remove Showcase\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.isShowcased
+                      ? _c("form", { attrs: { method: "POST" } }, [
+                          _c(
+                            "button",
+                            {
+                              attrs: { type: "button" },
+                              on: { click: _vm.addShowcase }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            Showcase\n                        "
+                              )
+                            ]
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                : _vm._e()
+            ])
+          ],
+          1
+        )
       ],
       1
     )
@@ -40427,49 +40429,42 @@ var render = function() {
           }
         }),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass:
-          "ml-2 flex flex-1 justify-between items-center lg:block mb-5 lg:mb-0"
-      },
-      [
-        _c("div", [
-          _c("h5", [_c("strong", [_vm._v(_vm._s(_vm.author.name))])]),
-          _vm._v(" "),
-          _c("p", { staticClass: "mb-1" }, [
-            _vm._v(_vm._s(_vm.author.country) + ", " + _vm._s(_vm.author.city))
-          ])
+    _c("div", { staticClass: "ml-2 lg:block md:mb-5 md-3 lg:mb-0" }, [
+      _c("div", [
+        _c("h5", [_c("strong", [_vm._v(_vm._s(_vm.author.name))])]),
+        _vm._v(" "),
+        _c("p", { staticClass: "mb-1" }, [
+          _vm._v(_vm._s(_vm.author.country) + ", " + _vm._s(_vm.author.city))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex md:block" }, [
+        _c("p", { staticClass: "text-xs flex items-center mr-3 md:mr-1" }, [
+          _c("img", {
+            staticClass: "mr-1",
+            attrs: {
+              src: _vm.getAsset("images", "thumbs-up.svg"),
+              alt: "review icon"
+            }
+          }),
+          _vm._v(_vm._s(_vm.author.review_count) + " Reviews\n        ")
         ]),
         _vm._v(" "),
-        _c("div", [
-          _c("p", { staticClass: "text-xs flex items-center " }, [
-            _c("img", {
-              staticClass: "mr-1",
-              attrs: {
-                src: _vm.getAsset("images", "thumbs-up.svg"),
-                alt: "review icon"
-              }
-            }),
-            _vm._v(_vm._s(_vm.author.review_count) + " Reviews\n        ")
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: " text-xs flex items-center" }, [
-            _c("img", {
-              staticClass: "mr-1",
-              attrs: {
-                src: _vm.getAsset("images", "review-icon.svg"),
-                alt: "review icon"
-              }
-            }),
-            _vm._v(
-              _vm._s(_vm.author.average_rating) +
-                "\n            Avg. Rating\n        "
-            )
-          ])
+        _c("p", { staticClass: " text-xs flex items-center" }, [
+          _c("img", {
+            staticClass: "mr-1",
+            attrs: {
+              src: _vm.getAsset("images", "review-icon.svg"),
+              alt: "review icon"
+            }
+          }),
+          _vm._v(
+            _vm._s(_vm.author.average_rating) +
+              "\n            Avg. Rating\n        "
+          )
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

@@ -11,16 +11,16 @@
 
 
 
-        <div class="ml-2 flex flex-1 justify-between items-center lg:block mb-5 lg:mb-0">
-            <div>
+        <div class="ml-2 lg:block md:mb-5 md-3 lg:mb-0">
+            <div> 
                 <h5>
                 <strong>{{ author.name }}</strong>
             </h5>
             <p class="mb-1">{{ author.country }}, {{ author.city }}</p>
             </div>
 
-           <div>
-                <p class="text-xs flex items-center ">
+           <div class="flex md:block">
+                <p class="text-xs flex items-center mr-3 md:mr-1">
                 <img
                     :src="getAsset('images', 'thumbs-up.svg')"
                     alt="review icon"
