@@ -2474,10 +2474,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    rate: function rate(n) {
+    hover: function hover(n) {
       this.fullStars = n;
       this.emptyStars = 5 - n;
-      this.$emit('ratingChanged', n);
+    },
+    rate: function rate() {
+      this.$emit('ratingChanged', this.fullStars);
     }
   }
 });
@@ -39956,8 +39958,9 @@ var render = function() {
               xmlns: "http://www.w3.org/2000/svg"
             },
             on: {
-              click: function($event) {
-                return _vm.rate(n)
+              click: _vm.rate,
+              mouseover: function($event) {
+                return _vm.hover(n)
               }
             }
           },
@@ -39987,8 +39990,8 @@ var render = function() {
               xmlns: "http://www.w3.org/2000/svg"
             },
             on: {
-              click: function($event) {
-                return _vm.rate(n + _vm.fullStars)
+              mouseover: function($event) {
+                return _vm.hover(n + _vm.fullStars)
               }
             }
           },
