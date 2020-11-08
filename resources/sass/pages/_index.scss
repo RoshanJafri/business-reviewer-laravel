@@ -3,7 +3,12 @@
 
         & .business-cards {
 
-            @apply .p-4 .border .border-solid .border-gray-200 .rounded .mb-5 .flex;
+            
+            @apply .p-4 .border .border-solid .border-gray-200 .rounded .mb-5;
+
+            @media only screen and (min-width: 1024px) {
+                @apply .p-4 .border .border-solid .border-gray-200 .rounded .mb-5 .flex;
+            }
 
             &:hover {
                 @apply .bg-gray-100;
@@ -13,11 +18,17 @@
                 min-width: 300px;
                 width: 300px;
 
+                @media only screen and (max-width: 1024px) {
+                    margin-bottom: 15px;
+                    width: 100%;
+                } 
+
                 & img {
                     width: 100%;
                     height: 150px;
                     object-fit: cover;
                     object-position: center;
+                    border-radius: 3px;
                 }
             }
         }

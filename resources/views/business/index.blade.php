@@ -7,7 +7,7 @@
 </div> --}}
 <section class="flex index items-start">
 
-    <aside class="index__aside bg-orange-500 mr-5">
+    <aside class="md:block hidden index__aside bg-orange-500 mr-5">
         i am a side
     </aside>
     <main class="index__main flex-1">
