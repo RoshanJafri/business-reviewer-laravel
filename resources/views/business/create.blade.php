@@ -4,8 +4,10 @@
 
 <div class="flex justify-center">
 
-    <form action="/businesses" method="POST" enctype="multipart/form-data">
+    <form action="/businesses" method="POST" class="form" enctype="multipart/form-data">
         @csrf
+
+        <h1 class="text-2xl font-bold mb-3">Add a new business</h1>
 
         <div class="py-3 flex flex-col">
             <label for="country">Country</label>
@@ -17,7 +19,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="name">Business Name</label>
-            <input type="text" name="name" class="py-2 px-3 rounded" value="{{ old('name') }}" required>
+            <input type="text" name="name" value="{{ old('name') }}" required>
             @error('name')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -25,7 +27,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="address">Address</label>
-            <input type="text" name="address" class="py-2 px-3 rounded" value="{{ old('address') }}" required>
+            <input type="text" name="address" value="{{ old('address') }}" required>
             @error('address')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -33,7 +35,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="city">City</label>
-            <input type="text" name="city" class="py-2 px-3 rounded" value="{{ old('city') }}" required>
+            <input type="text" name="city" value="{{ old('city') }}" required>
             @error('city')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -41,7 +43,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="phone_number">Phone Number</label>
-            <input type="text" name="phone_number" class="py-2 px-3 rounded" value="{{ old('phone') }}" required>
+            <input type="text" name="phone_number" value="{{ old('phone') }}" required>
             @error('phone_number')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -86,7 +88,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="email">Business Email</label>
-            <input type="text" name="email" class="py-2 px-3 rounded" value="{{ old('phone') }}" required>
+            <input type="text" name="email" value="{{ old('phone') }}" required>
             @error('email')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -95,7 +97,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="website_url">Website Address</label>
-            <input type="text" name="website_url" class="py-2 px-3 rounded" value="{{ old('website_url') }}" required>
+            <input type="text" name="website_url" value="{{ old('website_url') }}" required>
             @error('website_url')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -103,7 +105,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="categories">Business Categories</label>
-            <select name="categories[]" class="py-2 px-3 rounded" multiple required>
+            <select name="categories[]" multiple required>
                 @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -115,8 +117,7 @@
 
         <div class="py-3 flex flex-col">
             <label for="description">Description</label>
-            <textarea type="text" name="description" class="py-2 px-3 rounded" cols="30"
-                rows="10">{{ old('description') }}</textarea>
+            <textarea type="text" name="description" cols="30" rows="10">{{ old('description') }}</textarea>
             @error('description')
             <p class="text-red-400 text-xs">{{ $message }}</p>
             @enderror
@@ -130,7 +131,10 @@
             @enderror
         </div>
 
-        <button type="submit" class="py-2 px-5 bg-blue-400 text-white rounded">Add New</button>
+        <button type="submit" class="py-2 px-5 bg-red-500 text-white rounded block w-full">Add New</button>
+        <small class="mt-2 block">By clicking, you agree to our <a class="text-blue-400" href="/terms-of-service">Terms
+                of
+                services</a></small>
     </form>
 
 </div>

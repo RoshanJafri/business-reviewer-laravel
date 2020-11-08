@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ route('register') }}" class="authentication__form">
+<form method="POST" action="{{ route('register') }}" class="form">
     <img src="{{ asset('/images/logo_notext.svg') }}" class="mx-auto mb-12" alt="review logo">
     @csrf
 

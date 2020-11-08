@@ -3,7 +3,7 @@
 @section('content')
 
 
-<form method="POST" action="{{ route('login') }}" class="authentication__form">
+<form method="POST" action="{{ route('login') }}" class="form">
     <img src="{{ asset('/images/logo_notext.svg') }}" class="mx-auto mb-12" alt="review logo">
     @csrf
 
