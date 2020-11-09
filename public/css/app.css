@@ -322,6 +322,7 @@ body {
 
 #dropdown-items {
   display: none;
+  z-index: 999999;
 }
 
 #dropdown-items.shown {

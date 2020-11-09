@@ -1,5 +1,6 @@
 #dropdown-items {
     display: none;
+    z-index: 999999;
 
     &.shown {
         display: block;
