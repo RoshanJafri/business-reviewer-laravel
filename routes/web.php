@@ -1,5 +1,6 @@
 <?php
 
+use App\Business;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $randomBusiness= Business::inRandomOrder()->first();
+    return view('welcome', compact('randomBusiness'));
 });
 
 
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::get('/businesses', 'BusinessController@index');
+Route::get('/businesses/random', 'BusinessController@random');
 Route::get('/businesses/{business}', 'BusinessController@show');
 
 
