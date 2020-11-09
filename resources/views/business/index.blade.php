@@ -5,14 +5,19 @@
     <a href="/businesses/create" class="py-2 px-5 bg-blue-400 rounded float-right my-3 text-white">Add a New
         Business</a>
 </div> --}}
-<section class="flex index items-start">
+<section class="lg:flex index items-start">
 
-    <aside class="md:block hidden index__aside bg-orange-500 mr-5">
-        i am a side
+    <aside class="index__aside mr-5 w-full md:w-1/4 hidden md:block">
+        <h5 class="text-xl font-bold mb-2">Categories</h5>
+        <ul>
+            <li><a href="/businesses?category=restaurant">Restaurant</a></li>
+            <li><a href="/businesses?category=bar">Bar</a></li>
+            <li><a href="/businesses?category=spa">Spa</a></li>
+            <li><a href="/businesses?category=hotel">Hotel</a></li>
+        </ul>
     </aside>
     <main class="index__main flex-1 flex flex-col">
-        <a href='/businesses/create'
-            class="self-end inline-block bg-red-500 ml-auto text-white button hover:bg-red-400 mb-4 px-3 flex items-center">
+        <a href='/businesses/create' class="add__button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="inline mr-2">
                 <g fill="#ffff">
                     <path

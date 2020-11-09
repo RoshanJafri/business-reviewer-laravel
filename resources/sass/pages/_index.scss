@@ -1,6 +1,10 @@
 .index {
     &__main {
 
+        .add__button {
+            @apply .self-end .inline-block .bg-red-500 .text-white .button .mb-4 .px-3 .py-2 .flex .rounded .items-center;
+        }
+
         & .business-cards {
 
             
@@ -35,6 +39,9 @@
     }
 
     &__aside {
-        width: 300px;
+        @apply .p-6 .border .border-2 .border-solid .border-gray-600 .rounded .mb-4;
+        @media only screen and (max-width: 1024px) {
+            @apply .p-6 .border .border-2 .border-solid .border-gray-600 .rounded;
+        }
     }
 }

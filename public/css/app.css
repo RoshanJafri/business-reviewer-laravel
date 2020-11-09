@@ -133,6 +133,26 @@ body {
   background-color: #f56565;
 }
 
+.index__main .add__button {
+  align-self: flex-end;
+  display: inline-block;
+  --bg-opacity: 1;
+  background-color: #f56565;
+  background-color: rgba(245, 101, 101, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  @apply .rounded .text-center .flex-1 .py-2;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  border-radius: 0.25rem;
+  align-items: center;
+}
+
 .index__main .business-cards {
   padding: 1rem;
   border-width: 1px;
@@ -187,7 +207,28 @@ body {
 }
 
 .index__aside {
-  width: 300px;
+  padding: 1.5rem;
+  border-width: 1px;
+  border-width: 2px;
+  border-style: solid;
+  --border-opacity: 1;
+  border-color: #718096;
+  border-color: rgba(113, 128, 150, var(--border-opacity));
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .index__aside {
+    padding: 1.5rem;
+    border-width: 1px;
+    border-width: 2px;
+    border-style: solid;
+    --border-opacity: 1;
+    border-color: #718096;
+    border-color: rgba(113, 128, 150, var(--border-opacity));
+    border-radius: 0.25rem;
+  }
 }
 
 .button {
