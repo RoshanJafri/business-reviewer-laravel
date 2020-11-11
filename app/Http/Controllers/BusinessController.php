@@ -13,7 +13,11 @@ class BusinessController extends Controller
     public function index()
     {
         $businesses =  $this->filterWithParams();
-        return view('business.index', compact('businesses'));
+        if(request()->wantsJson()){
+            return $businesses;
+        }else{
+            return view('business.index', ['businesses'=>$businesses]);
+        }
     }
 
     public function create()
@@ -21,7 +25,6 @@ class BusinessController extends Controller
         $categories = Category::all();
         return view('business.create', compact('categories'));
     }
-
 
     public function store(BusinessStoreRequest $request)
     {
@@ -55,8 +58,11 @@ class BusinessController extends Controller
         if (request()->orderBy) {
             $queryBuilder = (isset($queryBuilder)) ?  $queryBuilder->orderBy(request()->orderBy, 'DESC') : Business::orderBy(request()->orderBy, 'DESC');
         }
-
-        return isset($queryBuilder) ? $queryBuilder->get() : Business::orderBy('created_at', 'desc')->get();
+        if(request()->wantsJson()){
+            return isset($queryBuilder) ? $queryBuilder->with('categories')->get() : Business::orderBy('created_at', 'desc')->with('categories')->get();
+        }else{
+            return isset($queryBuilder) ? $queryBuilder->get() : Business::orderBy('created_at', 'desc')->get();
+        }
     }
 
     protected function storeBusiness($request)

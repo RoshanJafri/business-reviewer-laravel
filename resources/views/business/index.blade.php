@@ -25,9 +25,10 @@
                     </path>
                 </g>
             </svg>Add new business</a>
-        @foreach ($businesses as $business)
+        <businesses></businesses>
+        {{-- @foreach ($businesses as $business)
         @include('business.businessCard')
-        @endforeach
+        @endforeach --}}
     </main>
 </section>
 @endsection

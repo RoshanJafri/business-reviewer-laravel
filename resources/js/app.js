@@ -43,7 +43,14 @@ Vue.component(
     require("./components/review/AddReview.vue").default
 );
 
+
 Vue.component("reviews", require("./components/review/Reviews.vue").default);
+
+
+// Business section
+Vue.component(
+    "businesses",
+    require("./components/business/ShowBusinesses.vue").default);
 
 Vue.mixin({
     methods: {
