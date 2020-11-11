@@ -9,7 +9,7 @@
                 <div class="right-side ml-3 ">
                     <h2 class="font-bold text-xl">{{ business.name }}</h2>
                     <BusinessCategories v-for="category in business.categories" :category="category" :key="category.id"></BusinessCategories>
-                    <!--<x-star-rating :rating="business.average_review"   :small="true" />  -->
+                    <StarRating :rating="business.average_review"   :small="true" /> 
                     <p>{{business.description }}</p>
                 </div>
             </div>
@@ -22,11 +22,12 @@
 </style>
 <script>
 import BusinessCategories from "./BusinessCategories";
-
+import StarRating from "../StarRating";
 export default({
     props:['business'],
     components:{
         BusinessCategories,
+        StarRating,
     },
     computed:{
         imageUrl(){

@@ -2262,6 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BusinessCategories__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BusinessCategories */ "./resources/js/components/business/BusinessCategories.vue");
+/* harmony import */ var _StarRating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../StarRating */ "./resources/js/components/StarRating.vue");
 //
 //
 //
@@ -2285,10 +2286,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['business'],
   components: {
-    BusinessCategories: _BusinessCategories__WEBPACK_IMPORTED_MODULE_0__["default"]
+    BusinessCategories: _BusinessCategories__WEBPACK_IMPORTED_MODULE_0__["default"],
+    StarRating: _StarRating__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   computed: {
     imageUrl: function imageUrl() {
@@ -39884,6 +39887,10 @@ var render = function() {
                 key: category.id,
                 attrs: { category: category }
               })
+            }),
+            _vm._v(" "),
+            _c("StarRating", {
+              attrs: { rating: _vm.business.average_review, small: true }
             }),
             _vm._v(" "),
             _c("p", [_vm._v(_vm._s(_vm.business.description))])
