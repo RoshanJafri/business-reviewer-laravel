@@ -8,9 +8,6 @@
             class="rounded"
             :alt="author.name"
         />
-
-
-
         <div class="ml-2 lg:block md:mb-5 md-3 lg:mb-0">
             <div> 
                 <h5>

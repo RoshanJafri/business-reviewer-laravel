@@ -13,7 +13,12 @@ class BusinessController extends Controller
     public function index()
     {
         $businesses =  $this->filterWithParams();
-        return view('business.index', compact('businesses'));
+
+        if(request()->wantsJson()){
+            return $businesses;
+        }else{
+            return view('business.index', compact('businesses'));
+        }
     }
 
     public function create()
@@ -21,7 +26,6 @@ class BusinessController extends Controller
         $categories = Category::all();
         return view('business.create', compact('categories'));
     }
-
 
     public function store(BusinessStoreRequest $request)
     {
@@ -33,9 +37,6 @@ class BusinessController extends Controller
         return redirect($business->path());
     }
 
-
-
-
     public function show(Business $business)
     {
         $business->incrementViewCount();
@@ -44,19 +45,35 @@ class BusinessController extends Controller
 
     protected function filterWithParams()
     {
+        $queryBuilder = new Business;
         if (request()->category) {
             $queryBuilder = Category::where('name', request()->category)->first()->businesses();
         }
+        if (request()->search){
+            $search_query = request()->search;
 
+            $queryBuilder = 
+            $queryBuilder->where(function($query) use ($search_query) {
+                    $query
+                    ->orWhere('name','LIKE',"%{$search_query}%")
+                    ->orWhere('country','LIKE',"%{$search_query}%")
+                    ->orWhere('city','LIKE',"%{$search_query}%")
+                    ->orWhere('slug','LIKE',"%{$search_query}%")
+                    ->orWhere('description','LIKE',"%{$search_query}%");
+            });
+        }
         if (request()->rated) {
-            $queryBuilder =  (isset($queryBuilder)) ? $queryBuilder->where('average_review', '=', request()->rated) : Business::where('average_review', '=', request()->rated);
+            $queryBuilder =  $queryBuilder->where('average_review', '=', request()->rated);
         }
 
         if (request()->orderBy) {
-            $queryBuilder = (isset($queryBuilder)) ?  $queryBuilder->orderBy(request()->orderBy, 'DESC') : Business::orderBy(request()->orderBy, 'DESC');
+            $queryBuilder = $queryBuilder->orderBy(request()->orderBy, 'DESC');
         }
-
-        return isset($queryBuilder) ? $queryBuilder->get() : Business::orderBy('created_at', 'desc')->get();
+        if(request()->wantsJson()){
+            return $queryBuilder->with('categories')->get();
+        }else{
+            return $queryBuilder->get();
+        }
     }
 
     protected function storeBusiness($request)
