@@ -1,10 +1,6 @@
 @extends('layouts.app')
 @section('content')
 
-{{-- <div>
-    <a href="/businesses/create" class="py-2 px-5 bg-blue-400 rounded float-right my-3 text-white">Add a New
-        Business</a>
-</div> --}}
 <section class="lg:flex index items-start">
 
     <aside class="index__aside mr-5 w-full md:w-1/4 hidden md:block">
@@ -25,10 +21,8 @@
                     </path>
                 </g>
             </svg>Add new business</a>
+            <hr>
         <businesses></businesses>
-        {{-- @foreach ($businesses as $business)
-        @include('business.businessCard')
-        @endforeach --}}
     </main>
 </section>
 @endsection
