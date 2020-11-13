@@ -50,7 +50,7 @@ Vue.component("reviews", require("./components/review/Reviews.vue").default);
 // Business section
 Vue.component(
     "businesses",
-    require("./components/business/ShowBusinesses.vue").default);
+    require("./components/business/BusinessList.vue").default);
 
 Vue.mixin({
     methods: {

@@ -1,7 +1,7 @@
 <template>
     <div>
         <hr>
-        <a :href="'businesses/'+ business.path ">
+        <a :href="'businesses/'+ business.slug ">
             <div class="business-cards">
                 <div class="image-container">
                     <img :src="imageUrl">
@@ -9,7 +9,7 @@
                 <div class="right-side ml-3 ">
                     <h2 class="font-bold text-xl">{{ business.name }}</h2>
                     <BusinessCategories v-for="category in business.categories" :category="category" :key="category.id"></BusinessCategories>
-                    <StarRating :rating="business.average_review"   :small="true" /> 
+                    <StarRating :rating="business.average_review" :createdAt="business.created_at"  :small="true" /> 
                     <p>{{business.description }}</p>
                 </div>
             </div>
