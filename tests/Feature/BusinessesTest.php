@@ -59,12 +59,12 @@ class BusinessesTest extends TestCase
 
     public function test_a_guest_can_see_business_list()
     {
-        $wakandaCity = BusinessFactory::create();
-        $bannerCave = BusinessFactory::create();
+        BusinessFactory::create();
+        BusinessFactory::create();
 
-        $this->get('/businesses')
-            ->assertSee(Str::limit($wakandaCity->name, 50))
-            ->assertSee(Str::limit($bannerCave->name, 50));
+        $this->getJson('/businesses')
+            ->assertStatus(200)
+            ->assertJsonCount(2);
     }
 
     public function test_a_guest_can_view_business_and_reviews()
