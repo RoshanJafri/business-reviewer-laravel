@@ -34,8 +34,10 @@
         @include('layouts.navigation')
         <main>
             <div class="header" style="background-image: url('{{ asset($randomBusiness->image()) }}');">
-                <input type=" text" placeholder="Search for restaurants, bars & so much more!">
-                <button>Search</button>
+                <form method="GET" action="/businesses">
+                    <input name="search" type="text" placeholder="Search for restaurants, bars & so much more!">
+                    <button type="submit">Search</button>
+                </form>
 
                 <div class="image__credits">Image provided by: <strong><a
                             href="{{ $randomBusiness->path() }}">{{ $randomBusiness->name }}</a></strong>
