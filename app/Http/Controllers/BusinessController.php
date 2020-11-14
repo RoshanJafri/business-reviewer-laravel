@@ -39,6 +39,11 @@ class BusinessController extends Controller
 
     public function show(Business $business)
     {
+        $session_key = 'business-'.$business->id;
+        if(!Session::has($session_key)){
+            $business->incrementViewCount();
+            Session::put($session_key,Str::random(2));
+        }
         $business->incrementViewCount();
         return view('business.show', compact('business'));
     }
