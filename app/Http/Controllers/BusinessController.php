@@ -45,7 +45,6 @@ class BusinessController extends Controller
             $business->incrementViewCount();
             Session::put($session_key,Str::random(2));
         }
-        $business->incrementViewCount();
         return view('business.show', compact('business'));
     }
 
