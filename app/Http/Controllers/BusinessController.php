@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Business;
 use App\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Http\Requests\BusinessStoreRequest;
 
