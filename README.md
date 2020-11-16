@@ -40,3 +40,4 @@ php artisan migrate:fresh --seed
 ### Credits
 
 -   Nik Vogrinec - https://github.com/NikVogri
+-   Roshan Jafri - https://github.com/RoshanJafri
